@@ -6,8 +6,8 @@ public class App {
         boolean working = true;
 
         Scanner sInt = new Scanner(System.in);
-
         Scanner sString = new Scanner(System.in);
+
         int eleccion;
         int eleccion2;
 
@@ -110,6 +110,8 @@ public class App {
                     break;
             }
         }
+        sInt.close();
+        sString.close();
 
     }
 }
