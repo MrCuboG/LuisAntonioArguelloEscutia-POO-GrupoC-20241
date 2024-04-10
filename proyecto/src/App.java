@@ -1,5 +1,8 @@
+import productos.Electrodomestico;
+import java.time.LocalDate;
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        Electrodomestico electrodomestico = new Electrodomestico("Refri", 1232, null, "sdfsfd");
+        electrodomestico.agregarStock(23); 
     }
 }
