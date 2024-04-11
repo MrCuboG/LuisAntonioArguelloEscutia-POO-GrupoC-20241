@@ -1,8 +1,19 @@
-import productos.Electrodomestico;
-import java.time.LocalDate;
+import productos.Producto;
+import java.util.*;
 public class App {
     public static void main(String[] args) throws Exception {
-        Electrodomestico electrodomestico = new Electrodomestico("Refri", 1232, null, "sdfsfd");
-        electrodomestico.agregarStock(23); 
+        String contrasena = "";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Inserte la contraseña: ");
+        while (!contrasena.equals("123")) {
+            contrasena = scanner.nextLine();
+            if (!contrasena.equals("123")){
+                System.out.println("Contraseña incorrecta");
+            }
+        }
+        Sistema sistema = new Sistema();
+        sistema.iniciarPrograma();
+        scanner.close();
+        
     }
 }
