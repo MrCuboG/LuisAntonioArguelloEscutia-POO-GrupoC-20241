@@ -57,6 +57,7 @@ public class Menu {
             case "2":
                 break;
             case "3":
+                cerrarSesion();
                 break;
         }
     }
@@ -70,25 +71,31 @@ public class Menu {
         System.out.println("4. Registrar cliente");
         System.out.println("5. Consultar cliente");
         System.out.println("6. Modificar cliente");
-        System.out.println("7. Consultar rentas");
-        System.out.println("8. Salir");
+        System.out.println("7. Eliminar Cliente");
+        System.out.println("8. Consultar rentas");
+        System.out.println("9. Salir");
         String opcion = scanner.nextLine();
         switch (opcion) {
             case "1" :
+                libreria.registrarLibro();
                 break;
             case "2":
                 break;
             case "3":
                 break;
             case "4":
+                libreria.registrarCliente();
                 break;
             case "5" :
+                libreria.mostrarClientes();
                 break;
             case "6":
                 break;
             case "7":
+                libreria.eliminarClientes();
                 break;
-            case "8":
+            case "9":
+                cerrarSesion();
                 break;
         }
     }
@@ -102,14 +109,17 @@ public class Menu {
         System.out.println("4. Registrar cliente");
         System.out.println("5. Consultar cliente");
         System.out.println("6. Modificar cliente");
-        System.out.println("7. Consultar rentas");
-        System.out.println("8. Consultar asistente");
-        System.out.println("9. Modificar asistente");
+        System.out.println("7. Eliminar cliente");
+        System.out.println("8. Consultar rentas");
+        System.out.println("9. Registrar asistente");
         System.out.println("10. Consultar asistente");
-        System.out.println("11. Eliminar rentas");
-        System.out.println("12. Modificar cliente");
-        System.out.println("13. Consultar rentas");
-        System.out.println("14. Salir");
+        System.out.println("11. Modificar asistente");
+        System.out.println("12. Consultar asistente");
+        System.out.println("13. Eliminar asistente");
+        System.out.println("14. Eliminar rentas");
+        System.out.println("15. Modificar cliente");
+        System.out.println("16. Consultar rentas");
+        System.out.println("17. Salir");
         String opcion = scanner.nextLine();
         switch (opcion) {
             case "1" :
@@ -119,27 +129,52 @@ public class Menu {
             case "3":
                 break;
             case "4":
+                libreria.registrarCliente();
                 break;
             case "5" :
+                libreria.mostrarClientes();
                 break;
             case "6":
                 break;
             case "7":
+                libreria.eliminarClientes();
                 break;
             case "8":
                 break;
-            case "9" :
+            case "9":
+                libreria.registrarAsistente();
                 break;
-            case "10":
+            case "10" :
+                libreria.mostrarAsistentes();
                 break;
             case "11":
                 break;
             case "12":
                 break;
-            case "13" :
+            case "13":
+                libreria.eliminarAsistente();
                 break;
-            case "14":
+            case "14" :
                 break;
+            case "15":
+                break;
+            case "16":
+                break;
+            case "17":
+                cerrarSesion();
+                break;
+        }
+    }
+
+    public void cerrarSesion() {
+        boolean datosCorrectos = true;
+        String usuario = null;
+        String contrasena = null;
+        Usuario newUsuario = libreria.verificarInicioSesion(usuario, contrasena);
+        if (newUsuario == null) {
+            datosCorrectos = false;
+            System.out.println("Se cerró la sesión");
+            System.out.println("Hasta luego!!");
         }
     }
 }
