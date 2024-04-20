@@ -2,15 +2,15 @@ package Libreria;
 
 import usuarios.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import usuarios.utils.*;;
 
 public class Libreria {
 
     private ArrayList<Libro> libros = new ArrayList<Libro>();
+    private HashMap<Rol, Object> listaUsuarios1 = new HashMap<>();
     private ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
-    private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-    private ArrayList<Usuario> usuariosTotales = new ArrayList<Usuario>();
     Scanner leer = new Scanner(System.in);
 
     public Usuario verificarInicioSesion(String nombreUsuario, String contraseña) {
@@ -55,6 +55,7 @@ public class Libreria {
 
         Cliente newCliente = new Cliente(nombre, apellido, telefono, nombreUsuario, clave);
         listaUsuarios.add(newCliente);
+        listaUsuarios1.put(Rol.CLIENTE, newCliente);
 
         System.out.println("Usuario registrado con rol de CLIENTE y con id " + newCliente.getId());
     }
@@ -83,11 +84,12 @@ public class Libreria {
             System.out.print("Contraseña: ");
             String clave = leer.nextLine();
 
-            Gerente newAdmin = new Gerente(nombre, apellido, telefono, nombreUsuario, nombreUsuario, sueldo, clave,
+            Gerente newGerente = new Gerente(nombre, apellido, telefono, nombreUsuario, nombreUsuario, sueldo, clave,
                     INE);
-            listaUsuarios.add(newAdmin);
+            listaUsuarios.add(newGerente);
+            listaUsuarios1.put(Rol.GERENTE, newGerente);
 
-            System.out.println("Usuario registrado con rol de ADMINISTRADOR y con id " + newAdmin.getId());
+            System.out.println("Usuario registrado con rol de GERENTE y con id " + newGerente.getId());
         } else {
             System.out.println("\nNo eres un gerente, no puedes registrar a otro gerente");
             return;
@@ -148,6 +150,7 @@ public class Libreria {
             String clave = leer.nextLine();
 
             Asistente newAsistente = new Asistente(nombre, apellido, telefono, nombreUsuario, clave, sueldo, RFC, INE);
+            listaUsuarios1.put(Rol.ASISTENTE, newAsistente);
             listaUsuarios.add(newAsistente);
 
             System.out.println("Usuario registrado con rol de ASISTENTE y con id " + newAsistente.getId());
@@ -233,16 +236,16 @@ public class Libreria {
         System.out.print("\nIngrese el nombre de usuario del cliente a eliminar: ");
         String nombreUsuario = scanner.nextLine();
 
-        int indiceEliminado = 0;
-
-        for (Usuario cliente : listaUsuarios) {
-            if (cliente.getNombreUsuario().equals(nombreUsuario)) {
-                listaUsuarios.remove(indiceEliminado);
+        listaUsuarios1.forEach((nombreUsuarioActual, cliente) -> {
+            if (nombreUsuarioActual.equals(Rol.CLIENTE) && (((Cliente) cliente).getNombreUsuario().equals(nombreUsuario))) {
+                listaUsuarios.remove(cliente);
+                listaUsuarios1.remove(Rol.CLIENTE, cliente);
                 System.out.println("\nCliente eliminado con éxito");
                 return;
+                
             }
-            indiceEliminado++;
-        }
+            
+        });
         System.out.println("\nEl cliente no existe en sistema");
 
     }
@@ -260,14 +263,14 @@ public class Libreria {
 
             int indiceEliminado = 0;
 
-            for (Usuario asistente : listaUsuarios) {
-                if (asistente.getNombreUsuario().equals(nombreUsuario)) {
-                    listaUsuarios.remove(indiceEliminado);
+            listaUsuarios1.forEach((nombreUsuarioActual, asistente) -> {
+                if (nombreUsuarioActual.equals(Rol.ASISTENTE) && (((Asistente) asistente).getNombreUsuario().equals(nombreUsuario))) {
+                    listaUsuarios.remove(asistente);
+                    listaUsuarios1.remove(Rol.ASISTENTE, asistente);
                     System.out.println("\nAsistente eliminado con éxito");
                     return;
-                }
-                indiceEliminado++;
-            }
+                }              
+            });
             System.out.println("\nEl asistente no existe en sistema");
 
         } else {
@@ -290,14 +293,14 @@ public class Libreria {
 
             int indiceEliminado = 0;
 
-            for (Usuario gerente : listaUsuarios) {
-                if (gerente.getNombreUsuario().equals(nombreUsuario)) {
-                    listaUsuarios.remove(indiceEliminado);
+            listaUsuarios1.forEach((nombreUsuarioActual, gerente) -> {
+                if (nombreUsuarioActual.equals(Rol.GERENTE) && (((Gerente) gerente).getNombreUsuario().equals(nombreUsuario))) {
+                    listaUsuarios.remove(gerente);
+                    listaUsuarios1.remove(Rol.GERENTE, gerente);
                     System.out.println("\nGerente eliminado con éxito");
                     return;
-                }
-                indiceEliminado++;
-            }
+                }              
+            });
             System.out.println("\nEl gerente no existe en sistema");
 
         } else {
