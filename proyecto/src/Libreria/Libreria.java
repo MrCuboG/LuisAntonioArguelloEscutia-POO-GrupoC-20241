@@ -14,10 +14,10 @@ public class Libreria {
     Scanner leer = new Scanner(System.in);
 
     public Usuario verificarInicioSesion(String nombreUsuario, String contraseña) {
-        for (Usuario usuario : listaUsuarios) {
-            if (usuario.getNombre().equals(nombreUsuario)) {
-                if (usuario.getContraseña().equals(contraseña)) {
-                    return usuario;
+        for (Object usuario : listaUsuarios1.values()) {
+            if (((Usuario) usuario).getNombre().equals(nombreUsuario)) {
+                if (((Usuario) usuario).getContraseña().equals(contraseña)) {
+                    return ((Usuario) usuario);
                 }
                 return null;
             }
@@ -106,8 +106,8 @@ public class Libreria {
             telefono = leer.nextLine();
 
             telefonoExistente = false;
-            for (Usuario usuario : listaUsuarios) {
-                if (usuario.getTelefono().equals(telefono)) {
+            for (Object usuario : listaUsuarios1.values()) {
+                if (((Usuario)usuario).getTelefono().equals(telefono)) {
                     telefonoExistente = true;
                     break;
                 }
@@ -242,7 +242,7 @@ public class Libreria {
                 listaUsuarios1.remove(Rol.CLIENTE, cliente);
                 System.out.println("\nCliente eliminado con éxito");
                 return;
-                
+
             }
             
         });

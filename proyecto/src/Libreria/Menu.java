@@ -175,7 +175,6 @@ public class Menu {
             datosCorrectos = false;
             System.out.println("Se cerró la sesión");
             System.out.println("Hasta luego!!");
-            
         }
     }
 }
