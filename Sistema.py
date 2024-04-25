@@ -3,6 +3,7 @@ from Animales import Animal
 from Personal import Empleado
 from Visitante import Visita
 from Visitante import Guia
+from Visitante import Zoo
 from array import array
 from Actividades import Act
 
@@ -13,8 +14,9 @@ class Systema:
     lista_Visitas=[]
     lista_Actividades = []
     tru = True
+    
     def inicioSistema(self):
-
+        zoo = Zoo()
         while self.tru == True:
             print("***********BIENVENIDO***********")
             print("Desea interactuar con que datos?")
@@ -362,6 +364,13 @@ class Systema:
         else:
             fecha_visita = input("Ingrese la fecha de la visita (DD-MM-YYYY): ")
             self.registrar_visita(guia, visitantes, fecha_visita)
+
+    def registrar_visita(self, guia, visitantes, fecha_visita):
+        visita = Visita(guia, visitantes, fecha_visita)
+        self.lista_Visitas.append(visita)
+        for visitante in visitantes:
+            visitante.numero_visitas += 1
+        print("Visita registrada")
 
     #ELIMINAR    
     def eliminar_Datos_Visita(self):
