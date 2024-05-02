@@ -13,7 +13,7 @@ public class Trapecio extends Shape{
     }
 
     @Override
-    protected double calcularPerimetro() {
+    public double calcularPerimetro() {
         double perimetro = baseMayor +baseMenor+ ladoInclinado*2;
         return perimetro;
     }

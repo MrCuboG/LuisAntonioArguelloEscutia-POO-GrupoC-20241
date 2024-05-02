@@ -1,4 +1,3 @@
-public abstract class Shape {
-    protected abstract double calcularArea();
-    protected abstract double calcularPerimetro();
+public abstract class Shape implements ShapeInterface{
+    
 }
