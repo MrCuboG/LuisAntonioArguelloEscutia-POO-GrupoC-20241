@@ -1,0 +1,19 @@
+Index: proyecto/src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class Main {\r\n    public static void main(String[] args) throws Exception {\r\n        System.out.println(\"Hello, World!\");\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/proyecto/src/Main.java b/proyecto/src/Main.java
+--- a/proyecto/src/Main.java	(revision 794c99715424ce6a23ea09e3622fe365bd1f8632)
++++ b/proyecto/src/Main.java	(date 1714445121258)
+@@ -1,5 +1,8 @@
+ public class Main {
+     public static void main(String[] args) throws Exception {
+         System.out.println("Hello, World!");
++        //hola
+     }
++
++
+ }
