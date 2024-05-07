@@ -1,4 +1,6 @@
 package Libreria;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import Usuarios.Usuario;
 import Usuarios.utils.Rol;
@@ -9,7 +11,8 @@ public class Menu {
     private Libreria libreria = new Libreria();
     private Scanner leer = new Scanner(System.in);
 
-    public void iniciarSesion() { //al hacerlo estático podemos llamar este metodo sin necesidad de crear un objeto
+    public void iniciarSesion() { // al hacerlo estático podemos llamar este metodo sin necesidad de crear un
+                                  // objeto
         Scanner scanner = new Scanner(System.in);
         boolean datosCorrectos = false;
         do {
@@ -21,29 +24,28 @@ public class Menu {
             System.out.println("Ingresa tu contraseña: ");
             String contrasena = scanner.nextLine();
             Usuario usuarioActual = libreria.verificarInicioSesion(usuario, contrasena);
-            if(usuarioActual != null) {
-                //datos correctos y mostramos el menú correspondiente
+            if (usuarioActual != null) {
+                // datos correctos y mostramos el menú correspondiente
                 datosCorrectos = true;
                 UsuarioEnSesion.obtenerInstancia().setUsuarioActual(usuarioActual);
                 seleccionarMenu();
-            }
-            else {
+            } else {
                 System.out.println("\nUsuario o contraseña incorrectos.");
                 datosCorrectos = true;
             }
-        }
-        while(datosCorrectos == true);
+        } while (datosCorrectos == true);
     }
 
-
-
-    //funcion lambda
+    // funcion lambda
     private void seleccionarMenu() {
         Usuario usuario = UsuarioEnSesion.obtenerInstancia().getUsuarioActual();
         switch (usuario.getRol()) {
-            case CLIENTE: mostrarMenuCliente(usuario.getNombreUsuario());
-            case ASISTENTE: mostrarMenuAsistente(usuario.getNombreUsuario());
-            case GERENTE: mostrarMenuGerente(usuario.getNombreUsuario());
+            case CLIENTE:
+                mostrarMenuCliente(usuario.getNombreUsuario());
+            case ASISTENTE:
+                mostrarMenuAsistente(usuario.getNombreUsuario());
+            case GERENTE:
+                mostrarMenuGerente(usuario.getNombreUsuario());
         }
     }
 
@@ -60,9 +62,8 @@ public class Menu {
             System.out.println("\nIngrese opción: ");
             decision = leer.nextInt();
 
-            switch(decision) {
+            switch (decision) {
                 case 1:
-                    libreria.mostrarLibros();
                     break;
 
                 case 2:
@@ -79,8 +80,7 @@ public class Menu {
                     iniciarSesion();
                     break;
             }
-        }
-        while(decision != 5);
+        } while (decision != 5);
         System.out.println("\nSesión cerrada");
     }
 
@@ -97,20 +97,20 @@ public class Menu {
             System.out.println("6. Eliminar libros");
             System.out.println("7. Modificar datos de un cliente");
             System.out.println("8. Modificar datos de un libro");
-            System.out.println("9. Agregar libro");
+            System.out.println("9. Registar libro");
             System.out.println("10. Cerrar sesión");
             System.out.println("\nIngrese opción: ");
             decision = leer.nextInt();
 
             switch (decision) {
                 case 1:
-                    libreria.mostrarLibros();
+                    
                     break;
 
-                case 2: 
+                case 2:
                     break;
 
-                case 3: 
+                case 3:
                     libreria.registrarCliente();
                     break;
 
@@ -124,7 +124,7 @@ public class Menu {
 
                 case 6:
                     break;
-                
+
                 case 7:
                     break;
 
@@ -132,16 +132,15 @@ public class Menu {
                     break;
 
                 case 9:
-                    libreria.registrarLibro();
+                    menuRegistrarLibro();
+                    
                     break;
-
                 case 10:
                     UsuarioEnSesion.obtenerInstancia().cerrarSesion();
                     iniciarSesion();
                     break;
             }
-        }
-        while(decision != 10);
+        } while (decision != 10);
         System.out.println("\nSesión cerrada");
     }
 
@@ -174,13 +173,13 @@ public class Menu {
 
             switch (decision) {
                 case 1:
-                    libreria.mostrarLibros();
+                    
                     break;
 
-                case 2: 
+                case 2:
                     break;
 
-                case 3: 
+                case 3:
                     libreria.registrarCliente();
                     break;
 
@@ -194,7 +193,7 @@ public class Menu {
 
                 case 6:
                     break;
-                
+
                 case 7:
                     break;
 
@@ -210,7 +209,7 @@ public class Menu {
                     break;
 
                 case 11:
-                    libreria.registrarLibro();
+                    
                     break;
 
                 case 12:
@@ -237,16 +236,59 @@ public class Menu {
                 case 18:
                     libreria.eliminarUsuario(Rol.GERENTE);
                     break;
-                
+
                 case 19:
                     UsuarioEnSesion.obtenerInstancia().cerrarSesion();
                     iniciarSesion();
                     break;
 
-                
             }
-        }
-        while(decision != 19);   
-        System.out.println("\nSesión cerrada");  
+        } while (decision != 19);
+        System.out.println("\nSesión cerrada");
+    }
+
+    private void menuRegistrarLibro() {
+        int opcionMenuRegistrarLibro = 0;
+        boolean opcionIncorrecta = true;
+        do {
+            System.out.println("Registrar Libro");
+            System.out.println("Ingresa el genero del libro que deseas registarar");
+            System.out.println("1.Accion");
+            System.out.println("2.Terror");
+            System.out.println("3.Comedia");
+            System.out.println("4.Salir");
+            while (opcionIncorrecta) {
+                try {
+                    opcionMenuRegistrarLibro = leer.nextInt();
+                    if (opcionMenuRegistrarLibro > 4 || opcionMenuRegistrarLibro < 1) {
+                        throw new InputMismatchException();
+                    }
+
+                    
+                } catch (InputMismatchException e) {
+                    System.out.println("Ingresaste un valor incorrecto, intenta de nuevo");
+                    leer.nextLine();
+                }finally{
+                    leer.nextLine();
+                }
+
+                opcionIncorrecta = false;
+
+            }
+
+            switch (opcionMenuRegistrarLibro) {
+                case 1:
+                    System.out.println("");
+                    break;
+                case 2:
+                    System.out.println("");
+                    break;
+                case 3:
+                    System.out.println("");
+                    break;
+            }
+
+        } while (opcionMenuRegistrarLibro != 4);
+
     }
 }
