@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0229e97a-d030-4816-9880-ccc4700c7090" name="Changes" comment="a" />
+    <list default="true" id="0229e97a-d030-4816-9880-ccc4700c7090" name="Changes" comment="a">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024_07_09_a__m___Changes_by_maria_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024_07_09_a__m___Changes_by_maria_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/Libreria/Libreria.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/Libreria/Libro.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/Libreria/Menu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/Usuarios/Asistente.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/Usuarios/Cliente.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/Usuarios/Gerente.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/Usuarios/Usuario.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/Usuarios/utils/Rol.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/out/production/proyecto/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/out/production/proyecto/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/out/production/proyecto/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/out/production/proyecto/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/out/production/proyecto/Cuadrado.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/out/production/proyecto/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/out/production/proyecto/Rectangulo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/out/production/proyecto/Shape.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/out/production/proyecto/ShapeInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/out/production/proyecto/Trapecio.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/out/production/proyecto/Triangulo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/out/production/proyecto/proyecto.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/proyecto.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto/src/utils/UsuarioEnSesion.java" beforeDir="false" />
+    </list>
     <list id="07e9ffe9-4cd3-418c-8684-f0534de16f3d" name="Changes by maria" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +78,7 @@
     "git-widget-placeholder": "tarea3/unidad4",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/mrcub/Documents/POO/LuisAntonioArguelloEscutia-POO-GrupoC-20241/proyecto/src",
+    "last_opened_file_path": "C:/Users/mrcub/Documents/POO/LuisAntonioArguelloEscutia-POO-GrupoC-20241/proyecto",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -97,6 +123,14 @@
       <workItem from="1714522794271" duration="22000" />
       <workItem from="1714656659109" duration="1025000" />
       <workItem from="1714878395797" duration="8000" />
+      <workItem from="1715005117406" duration="12000" />
+      <workItem from="1715005165881" duration="59000" />
+      <workItem from="1715005232532" duration="18000" />
+      <workItem from="1715005256791" duration="14000" />
+      <workItem from="1715005282263" duration="614000" />
+      <workItem from="1715006094929" duration="26000" />
+      <workItem from="1715006127081" duration="13000" />
+      <workItem from="1715006150062" duration="34000" />
     </task>
     <task id="LOCAL-00001" summary="a">
       <option name="closed" value="true" />
@@ -114,6 +148,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="a" />
-    <option name="LAST_COMMIT_MESSAGE" value="a" />
+    <MESSAGE value="se agregaron las clases de Inversionista, Rol y Usuario" />
+    <option name="LAST_COMMIT_MESSAGE" value="se agregaron las clases de Inversionista, Rol y Usuario" />
   </component>
 </project>
