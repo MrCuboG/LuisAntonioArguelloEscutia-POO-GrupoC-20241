@@ -3,11 +3,18 @@ package Users;
 import Users.utils.UsuarioUtils;
 import Users.utils.constantes.Rol;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+
+
 
 public class Cliente extends Usuario {
     private final String fechaRegistroStr;
+
+    //PORFA ALGUIEN AGREGUE EL ID PORQUE FALTA EN CLIENTE
+
 
     public Cliente(String nombre, String apellido, String domicilio, String nacimiento, String rfc, String curp, String user, String password, String fechaRegistroStr) {
         super(nombre, apellido, domicilio, nacimiento, rfc, curp, user, password, Rol.CLIENTE);
@@ -31,6 +38,7 @@ public class Cliente extends Usuario {
 
         Cliente cliente = new Cliente(nombre, apellido, domicilio, nacimiento, rfc, curp, user, password, fechaRegistro);
     }
+
 }
 
 //    public String getNombre() {

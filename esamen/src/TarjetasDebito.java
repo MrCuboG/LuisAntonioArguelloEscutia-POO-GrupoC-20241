@@ -1,6 +1,7 @@
 import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
+import Users.Cliente;
 
 public class TarjetasDebito extends Tarjetas {
     public TarjetasDebito(String numTarjeta, String clabeInterbancaria, double cantidad, String CVV, LocalDateTime fechaCreacion, LocalDateTime fechaDeVencimiento, LocalDateTime ultimoMovimiento) {
@@ -53,5 +54,11 @@ public class TarjetasDebito extends Tarjetas {
     public boolean retirarDinero(double cantidad) {
         return super.retirarDinero(cantidad);
     }
+
+    public double obtenerSaldoDisponible(){
+        return this.getCantidad();
+    }
+
+
 
 }

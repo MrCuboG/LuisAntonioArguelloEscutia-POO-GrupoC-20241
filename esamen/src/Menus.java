@@ -204,9 +204,7 @@ public class Menus {
             System.out.println("--------- TARJETA DE DEBITO ---------");
             System.out.println(tarjetaDebito.toString());
         } else {
-            System.out.println("No se ha creado ninguna tarjeta de débito.");
+
         }
     }
-
-
 }
