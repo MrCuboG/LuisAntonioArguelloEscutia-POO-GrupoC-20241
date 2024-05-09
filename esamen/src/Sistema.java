@@ -1,12 +1,30 @@
+import Users.Empleados.Gerente;
+import Sucursales.SucursalMadero;
+import Users.Cliente;
+import Users.utils.constantes.Rol;
+
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Sistema {
     public void iniciarSistema(){
 
+
         String salir = "6";
 
         TarjetasDebito tarjetaDebito = null;
+        SucursalMadero sucursalMadero = null;
+        LocalDate localDate = LocalDate.now();
+        Menus menu = new Menus();
+        Gerente gerente = new Gerente(
+                "Luis", "Arguello", "Morelia", "Michoacan",
+                "calle 5", "2005", "123123", "123123",
+                "a", "123", Rol.GERENTE, sucursalMadero, 123, localDate);
 
+        Cliente cliente = new Cliente(
+                "Chavo", "Del 8", "La Vecindad",
+                "123", "123", "123", "123",
+                "123", "123");
         while (salir != "5") {
             Scanner scanner = new Scanner(System.in);
             System.out.println("-------------------- BANCO --------------------");
@@ -241,5 +259,8 @@ public class Sistema {
 
             }
         }
+    }
+    public void verificarInicioSesion(){
+
     }
 }

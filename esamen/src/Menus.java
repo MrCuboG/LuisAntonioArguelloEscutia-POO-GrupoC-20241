@@ -24,6 +24,8 @@ public class Menus {
         String usuario = scanner.nextLine();
         System.out.println("Ingrese su contraseña:");
         String contrasena = scanner.nextLine();
+        Sistema sistema = new Sistema();
+        sistema.verificarInicioSesion();
     }
 
     public void inversionista(){

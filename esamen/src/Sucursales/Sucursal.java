@@ -1,16 +1,20 @@
-package Empleados;
-import java.time.LocalDate;
-import Users.utils.constants.Rol;
+package Sucursales;
+
+import Users.Empleados.Gerente;
 
 public class Sucursal {
-    private String nombreSucursal;
-    private String direccionSucursal;
-    private GerenteSucursal gerenteSucursal;
+    protected String nombreSucursal;
+    protected String direccionSucursal;
+    protected Gerente gerenteSucursal= null;
 
-    public Sucursal(String nombreSucursal, String direccionSucursal, GerenteSucursal gerenteSucursal) {
+    public Sucursal(String nombreSucursal, String direccionSucursal, Gerente gerenteSucursal) {
         this.nombreSucursal = nombreSucursal;
         this.direccionSucursal = direccionSucursal;
         this.gerenteSucursal = gerenteSucursal;
+    }
+    public Sucursal(String nombreSucursal, String direccionSucursal) {
+        this.nombreSucursal = nombreSucursal;
+        this.direccionSucursal = direccionSucursal;
     }
 
     public String getNombreSucursal() {
@@ -29,13 +33,14 @@ public class Sucursal {
         this.direccionSucursal = direccionSucursal;
     }
 
-    public GerenteSucursal getGerenteSucursal() {
+    public Gerente getGerenteSucursal() {
         return gerenteSucursal;
     }
 
-    public void setGerenteSucursal(GerenteSucursal gerenteSucursal) {
+    public void setGerenteSucursal(Gerente gerenteSucursal) {
         this.gerenteSucursal = gerenteSucursal;
     }
+
 
     @Override
     public String toString() {
@@ -45,12 +50,4 @@ public class Sucursal {
                 ", gerenteSucursal=" + gerenteSucursal +
                 '}';
     }
-
-    GerenteSucursal gerenteMadero = new GerenteSucursal(getGerenteSucursal().getIdEmpleado(),
-            "Diana", "Campos", LocalDate.of(1980, 10, 15), "PEJH801015HMNXXX", "PEJH801015MCMNXXX",
-            "Calle Morelos #456", null, 50000.00, Rol.GERENTE_SUCURSAL,
-            LocalDate.of(2020, 01, 01));
-
-    SucursalMadero sucursalMadero = new SucursalMadero("Madero", "Av. Madero #123", gerenteMadero);
-
 }

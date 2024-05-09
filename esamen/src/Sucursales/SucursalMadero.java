@@ -1,8 +1,10 @@
-package Empleados;
+package Sucursales;
+
+import Users.Empleados.Gerente;
 
 public class SucursalMadero extends Sucursal{
 
-    public SucursalMadero(String nombreSucursal, String direccionSucursal, GerenteSucursal gerenteMadero) {
+    public SucursalMadero(String nombreSucursal, String direccionSucursal, Gerente gerenteMadero) {
         super(nombreSucursal, direccionSucursal, gerenteMadero);
     }
 

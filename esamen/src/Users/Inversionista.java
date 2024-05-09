@@ -1,6 +1,6 @@
 package Users;
 
-import Users.utils.constants.Rol;
+import Users.utils.constantes.Rol;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +14,7 @@ public class Inversionista extends Usuario {
                   String estado, String direccion, String nacimiento,
                   String rfc, String curp, String user, String password,
                   double saldo){
-        super(nombre, apellido, ciudad, estado, direccion, nacimiento, rfc, curp, user, password, Rol.INVERSIONISTA);
+        super(nombre, apellido, direccion, nacimiento, rfc, curp, user, password, Rol.INVERSIONISTA);
         this.saldo = saldo;
     }
 

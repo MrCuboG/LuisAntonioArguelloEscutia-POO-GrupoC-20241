@@ -1,13 +1,13 @@
 package Users;
 
-import Users.utils.constants.Rol;
+import Users.utils.constantes.Rol;
 
 public class Usuario {
     private String nombre, apellido, ciudad, estado, direccion, nacimiento, rfc, curp;
     private String user, password;
     Rol rol;
 
-    public Usuario(String nombre, String apellido, String ciudad, String estado, String direccion, String nacimiento, String rfc, String curp, String user, String password, Rol rol){
+    public Usuario(String nombre, String apellido, String direccion, String nacimiento, String rfc, String curp, String user, String password, Rol rol){
         this.nombre = nombre;
         this.apellido = apellido;
         this.ciudad = ciudad;
