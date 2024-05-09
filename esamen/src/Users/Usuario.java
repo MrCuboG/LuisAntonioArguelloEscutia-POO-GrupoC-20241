@@ -20,4 +20,16 @@ public class Usuario {
         this.password = password;
         this.rol = rol;
     }
+
+    public String getUser() {
+        return user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
 }
