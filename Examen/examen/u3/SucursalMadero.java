@@ -3,7 +3,7 @@ package examen.u3;
 
 import java.time.LocalDate;
 
-public class  SucursalMadero extends Sucursal {    
+public class SucursalMadero extends Sucursal {    
     private static int contadorIdEmpleado = 1;
     int idGerente = 1;
     
