@@ -1,0 +1,240 @@
+Index: src/Users/Cliente.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Users;\r\n\r\npublic class Cliente {\r\n    private String nombre;\r\n    private String apellidos;\r\n    private int añoNacimiento;\r\n    private String ciudad;\r\n    private String estado;\r\n    private String rfc;\r\n    private String curp;\r\n    private String direccion;\r\n    private String contraseña;\r\n    private String sucursalRegistro;\r\n    private String fechaRegistroStr;\r\n\r\n    public Cliente(String nombre,String apellidos, int añoNacimiento, String curp, String ciudad, String estado,String contraseña, String direccion, String fechaRegistroStr,String sucursalRegistro) {\r\n        this.nombre = nombre;\r\n        this.apellidos = apellidos;\r\n        this.añoNacimiento = añoNacimiento;\r\n        this.curp = curp;\r\n        this.ciudad = ciudad;\r\n        this.estado = estado;\r\n        this.contraseña= contraseña;\r\n        this.direccion = direccion;\r\n        this.fechaRegistroStr = fechaRegistroStr;\r\n        this.sucursalRegistro = sucursalRegistro;\r\n\r\n    }\r\n\r\n    public String getNombre() {\r\n        return nombre;\r\n    }\r\n\r\n    public void setNombre(String nombre) {\r\n        this.nombre = nombre;\r\n    }\r\n\r\n    public String getContraseña() {\r\n        return contraseña;\r\n    }\r\n\r\n    public void setContraseña(String contraseña) {\r\n        this.contraseña = contraseña;\r\n    }\r\n\r\n    public String getFechaRegistroStr() {\r\n        return fechaRegistroStr;\r\n    }\r\n\r\n    public void setFechaRegistroStr(String fechaRegistroStr) {\r\n        this.fechaRegistroStr = fechaRegistroStr;\r\n    }\r\n\r\n    public String getApellidos() {\r\n        return apellidos;\r\n    }\r\n\r\n    public void setApellidos(String apellidos) {\r\n        this.apellidos = apellidos;\r\n    }\r\n\r\n    public int getAñoNacimiento() {\r\n        return añoNacimiento;\r\n    }\r\n\r\n    public void setAñoNacimiento(int añoNacimiento) {\r\n        this.añoNacimiento = añoNacimiento;\r\n    }\r\n\r\n    public String getCiudad() {\r\n        return ciudad;\r\n    }\r\n\r\n    public void setCiudad(String ciudad) {\r\n        this.ciudad = ciudad;\r\n    }\r\n\r\n    public String getEstado() {\r\n        return estado;\r\n    }\r\n\r\n    public void setEstado(String estado) {\r\n        this.estado = estado;\r\n    }\r\n\r\n    public String getRfc() {\r\n        return rfc;\r\n    }\r\n\r\n    public void setRfc(String rfc) {\r\n        this.rfc = rfc;\r\n    }\r\n\r\n    public String getCurp() {\r\n        return curp;\r\n    }\r\n\r\n    public void setCurp(String curp) {\r\n        this.curp = curp;\r\n    }\r\n\r\n    public String getDireccion() {\r\n        return direccion;\r\n    }\r\n\r\n    public void setDireccion(String direccion) {\r\n        this.direccion = direccion;\r\n    }\r\n\r\n    public String getSucursalRegistro() {\r\n        return sucursalRegistro;\r\n    }\r\n\r\n    public void setSucursalRegistro(String sucursalRegistro) {\r\n        this.sucursalRegistro = sucursalRegistro;\r\n    }\r\n\r\n    public void generarRFC() {\r\n\r\n    }\r\n    public String toString() {\r\n        return \"Cliente{\" +\r\n                \"apellidos='\" + apellidos + '\\'' +\r\n                \", añoNacimiento=\" + añoNacimiento +\r\n                \", ciudad='\" + ciudad + '\\'' +\r\n                \", estado='\" + estado + '\\'' +\r\n                \", rfc='\" + rfc + '\\'' +\r\n                \", curp='\" + curp + '\\'' +\r\n                \", direccion='\" + direccion + '\\'' +\r\n                \", sucursalRegistro='\" + sucursalRegistro + '\\'' +\r\n\r\n                \", contraseña='\" + contraseña + '\\'' +\r\n                '}';\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/Users/Cliente.java b/src/Users/Cliente.java
+--- a/src/Users/Cliente.java	
++++ b/src/Users/Cliente.java	
+@@ -24,7 +24,6 @@
+         this.direccion = direccion;
+         this.fechaRegistroStr = fechaRegistroStr;
+         this.sucursalRegistro = sucursalRegistro;
+-
+     }
+ 
+     public String getNombre() {
+Index: src/Users/Inversionista.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Users;\r\nimport java.time.LocalDate;\r\nimport java.time.format.DateTimeFormatter;\r\n\r\npublic class Inversionista extends Usuario {\r\n\r\n    double saldo;\r\n    String fecha;\r\n    LocalDate localDate;\r\n\r\n    Inversionista(String name, String user, String password, Rol rol){\r\n        super(name, user, password, rol.INVERSIONISTA);\r\n    }\r\n\r\n    public void proveerFondos(/**Sucursal, cantidad**/){\r\n        // a sucursal.banco\r\n        // se agregan fondos al banco\r\n        // se registra el fondo en el sistema (se guarda la fecha del momento)\r\n        // se quitan los fondos a el inversionista,\r\n        localDate = LocalDate.now();\r\n        fecha = localDate.format(DateTimeFormatter.ofPattern(\"dd/MM/yyyy\"));\r\n    }\r\n\r\n}\r\n
+===================================================================
+diff --git a/src/Users/Inversionista.java b/src/Users/Inversionista.java
+--- a/src/Users/Inversionista.java	
++++ b/src/Users/Inversionista.java	
+@@ -1,15 +1,21 @@
+ package Users;
++
++import Users.utils.constants.Rol;
++
+ import java.time.LocalDate;
+ import java.time.format.DateTimeFormatter;
+ 
+ public class Inversionista extends Usuario {
+-
+     double saldo;
+-    String fecha;
++
+     LocalDate localDate;
+ 
+-    Inversionista(String name, String user, String password, Rol rol){
+-        super(name, user, password, rol.INVERSIONISTA);
++    Inversionista(String nombre, String apellido, String ciudad,
++                  String estado, String direccion, String nacimiento,
++                  String rfc, String curp, String user, String password,
++                  double saldo){
++        super(nombre, apellido, ciudad, estado, direccion, nacimiento, rfc, curp, user, password, Rol.INVERSIONISTA);
++        this.saldo = saldo;
+     }
+ 
+     public void proveerFondos(/**Sucursal, cantidad**/){
+@@ -18,7 +24,7 @@
+         // se registra el fondo en el sistema (se guarda la fecha del momento)
+         // se quitan los fondos a el inversionista,
+         localDate = LocalDate.now();
+-        fecha = localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
++        String fecha = localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+     }
+ 
+ }
+Index: src/Users/Usuario.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Users;\r\n\r\npublic class Usuario {\r\n    private String name;\r\n    private String user, password;\r\n    private Rol rol;\r\n\r\n    public Usuario(String name, String user, String password, Rol rol) {\r\n        this.name = name;\r\n        this.user = user;\r\n        this.password = password;\r\n        this.rol = rol;\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/Users/Usuario.java b/src/Users/Usuario.java
+--- a/src/Users/Usuario.java	
++++ b/src/Users/Usuario.java	
+@@ -1,12 +1,21 @@
+ package Users;
+ 
++import Users.utils.constants.Rol;
++
+ public class Usuario {
+-    private String name;
++    private String nombre, apellido, ciudad, estado, direccion, nacimiento, rfc, curp;
+     private String user, password;
+-    private Rol rol;
++    Rol rol;
+ 
+-    public Usuario(String name, String user, String password, Rol rol) {
+-        this.name = name;
++    public Usuario(String nombre, String apellido, String ciudad, String estado, String direccion, String nacimiento, String rfc, String curp, String user, String password, Rol rol){
++        this.nombre = nombre;
++        this.apellido = apellido;
++        this.ciudad = ciudad;
++        this.estado = estado;
++        this.direccion = direccion;
++        this.nacimiento = nacimiento;
++        this.rfc = rfc;
++        this.curp = curp;
+         this.user = user;
+         this.password = password;
+         this.rol = rol;
+Index: src/Menus.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.Scanner;\r\n\r\n\r\n//IGNOREN ESTA CLASE ES INUTIL POR EL MOMENTO\r\n//IGNOREN ESTA CLASE ES INUTIL POR EL MOMENTO\r\n//IGNOREN ESTA CLASE ES INUTIL POR EL MOMENTO\r\n//IGNOREN ESTA CLASE ES INUTIL POR EL MOMENTO\r\n//IGNOREN ESTA CLASE ES INUTIL POR EL MOMENTO\r\n//IGNOREN ESTA CLASE ES INUTIL POR EL MOMENTO\r\n//IGNOREN ESTA CLASE ES INUTIL POR EL MOMENTO\r\n//IGNOREN ESTA CLASE ES INUTIL POR EL MOMENTO\r\n\r\n\r\npublic class Menus {\r\n    TarjetasDebito tarjetaDebito = null;\r\n    Scanner scanner = new Scanner(System.in);\r\n    public void inicioSesion(){\r\n        Scanner scanner = new Scanner(System.in);\r\n        System.out.println(\"-------------------- BANCO --------------------\");\r\n        System.out.println(\"            BIENVENIDO AL SISTEMA\");\r\n        System.out.println(\"Ingrese su usuario:\");\r\n        System.out.println(\"Ingrese su contraseña:\");\r\n        String sucursal = scanner.nextLine();\r\n    }\r\n    public void cliente(){\r\n        System.out.println(\"QUE DESEA HACER?\");\r\n        System.out.println(\"1. Ver Tarjetas\");\r\n        System.out.println(\"2. Agregar o Retirar Dinero\");\r\n        System.out.println(\"3. Solicitar Tarjeta de Credito\");\r\n        System.out.println(\"4. Salir\");\r\n        String opcion = scanner.nextLine();\r\n\r\n        switch (opcion){\r\n            case \"1\":\r\n                if (tarjetaDebito != null) {\r\n                    System.out.println(\"--------- TARJETA DE DEBITO ---------\");\r\n                    System.out.println(tarjetaDebito.toString());\r\n                } else {\r\n                    System.out.println(\"No se ha creado ninguna tarjeta de débito.\");\r\n                }\r\n                break;\r\n            case \"2\":\r\n                if (tarjetaDebito != null) {\r\n                    System.out.println(\"1. Agregar dinero\");\r\n                    System.out.println(\"2. Retirar dinero\");\r\n                    String opcionDinero = scanner.nextLine();\r\n\r\n                    switch (opcionDinero) {\r\n                        case \"1\":\r\n                            System.out.println(\"Ingrese la cantidad a agregar:\");\r\n                            double cantidadAgregar = scanner.nextDouble();\r\n                            tarjetaDebito.agregarDinero(cantidadAgregar);\r\n                            System.out.println(\"Se agregaron \" + cantidadAgregar + \" a la tarjeta\");\r\n                            break;\r\n                        case \"2\":\r\n                            System.out.println(\"Ingrese la cantidad a retirar:\");\r\n                            double cantidadRetirar = scanner.nextDouble();\r\n                            boolean retirado = tarjetaDebito.retirarDinero(cantidadRetirar);\r\n                            if (retirado) {\r\n                                System.out.println(\"Se retiraron \" + cantidadRetirar + \" de la tarjeta\");\r\n                            }\r\n                            break;\r\n                        default:\r\n                            System.out.println(\"Opción no válida\");\r\n                            break;\r\n                    }\r\n                } else {\r\n                    System.out.println(\"No se ha creado ninguna tarjeta de débito\");\r\n                }\r\n                break;\r\n            case \"3\":\r\n                if (tarjetaDebito.getCantidad() >= 50000 || tarjetaDebito.getCantidad() >= 100000 || tarjetaDebito.getCantidad() >= 200000) {\r\n                    if (tarjetaDebito.getCantidad() <= 100000) {\r\n                        System.out.println(\"Puedes solicitar una tarjeta Simplicity \");\r\n                        System.out.println(\"1. Solicitar Simplicity 2. Rechazar\");\r\n                        String opcionSolicitar = scanner.nextLine();\r\n                        switch (opcionSolicitar) {\r\n                            case \"1\":\r\n\r\n                                break;\r\n                            case \"2\":\r\n                                break;\r\n                        }\r\n                    } else if (tarjetaDebito.getCantidad() <= 200000) {\r\n                        System.out.println(\"Puedes solicitar alguna de las siguientes tarjetas: Simplicity o Platino \");\r\n                        System.out.println(\"1. Solicitar Simplicity 2. Solicitar Platino 3. Rechazar\");\r\n                        String opcionSolicitar = scanner.nextLine();\r\n                        switch (opcionSolicitar) {\r\n                            case \"1\":\r\n\r\n                                break;\r\n                            case \"2\":\r\n\r\n                                break;\r\n                            case \"3\":\r\n                                break;\r\n                        }\r\n                    } else {\r\n                        System.out.println(\"Puedes solicitar alguna de las siguientes tarjetas: Simplicity, Platino u Oro\");\r\n                        System.out.println(\"1. Solicitar Simplicity 2. Solicitar Platino 3. Solicitar Oro\");\r\n                        String opcionSolicitar = scanner.nextLine();\r\n                        switch (opcionSolicitar) {\r\n                            case \"1\":\r\n\r\n                                break;\r\n                            case \"2\":\r\n\r\n                                break;\r\n                            case \"3\":\r\n                                System.out.println(\"dasf\");\r\n                                break;\r\n                            case \"4\":\r\n                                break;\r\n                        }\r\n                    }\r\n                } else {\r\n                    System.out.println(\"Por el momento no puedes solicitar una tarjeta de credito\");\r\n                }\r\n                break;\r\n\r\n            case \"4\":\r\n                salir = \"5\";\r\n                System.out.println(\"Saliendo del programa...\");\r\n                break;\r\n            default:\r\n                System.out.println(\"Opción no válida\");\r\n        }\r\n    }\r\n\r\n    public void clienteTarjetas(){\r\n        if (tarjetaDebito != null) {\r\n            System.out.println(\"--------- TARJETA DE DEBITO ---------\");\r\n            System.out.println(tarjetaDebito.toString());\r\n        } else {\r\n            System.out.println(\"No se ha creado ninguna tarjeta de débito.\");\r\n        }\r\n    }\r\n\r\n\r\n}\r\n
+===================================================================
+diff --git a/src/Menus.java b/src/Menus.java
+--- a/src/Menus.java	
++++ b/src/Menus.java	
+@@ -14,14 +14,36 @@
+ public class Menus {
+     TarjetasDebito tarjetaDebito = null;
+     Scanner scanner = new Scanner(System.in);
++
++    String salir = "6";
+     public void inicioSesion(){
+         Scanner scanner = new Scanner(System.in);
+         System.out.println("-------------------- BANCO --------------------");
+         System.out.println("            BIENVENIDO AL SISTEMA");
+         System.out.println("Ingrese su usuario:");
++        String usuario = scanner.nextLine();
+         System.out.println("Ingrese su contraseña:");
+-        String sucursal = scanner.nextLine();
++        String contrasena = scanner.nextLine();
+     }
++
++    public void inversionista(){
++        Scanner scanner = new Scanner(System.in);
++        System.out.println("----------------INVERSIONISTA----------------");
++        System.out.println("1. Proveer fondos al banco");
++        System.out.println("2. Remover fondos del banco");
++        System.out.println("3. Salir");
++        int opcion = scanner.nextInt();
++        switch (opcion){
++            case 1:
++                //Inversionista.proveerFondos()
++                break;
++            case 2:
++                //Inversionista.removerFondos()
++                break;
++        }
++    }
++
++
+     public void cliente(){
+         System.out.println("QUE DESEA HACER?");
+         System.out.println("1. Ver Tarjetas");
+Index: src/utils/Rol.java
+===================================================================
+diff --git a/src/utils/Rol.java b/src/Users/utils/constants/Rol.java
+rename from src/utils/Rol.java
+rename to src/Users/utils/constants/Rol.java
+--- a/src/utils/Rol.java	
++++ b/src/Users/utils/constants/Rol.java	
+@@ -1,7 +1,8 @@
+-package utils;
++package Users.utils.constants;
+ 
+ public enum Rol {
+     GERENTE_SUCURSAL,
+     EJECUTIVO_CUENTA,
+-    CAPTURISTA;
+-}
++    CAPTURISTA,
++    INVERSIONISTA;
++}
+\ No newline at end of file
+Index: src/Sistema.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.Scanner;\r\n\r\npublic class Sistema {\r\n    public void iniciarSistema(){\r\n        String salir = \"6\";\r\n        TarjetasDebito tarjetaDebito = null;\r\n\r\n        while (salir != \"5\") {\r\n            Scanner scanner = new Scanner(System.in);\r\n            System.out.println(\"-------------------- BANCO --------------------\");\r\n            System.out.println(\"A que Sucursal Desea Ingresar?\");\r\n            System.out.println(\"1. Madero 2. Acueducto\");\r\n            String sucursal = scanner.nextLine();\r\n            if (sucursal == \"1\") {\r\n                System.out.println(\"Ha Ingresado a la Sucursal Madero\");\r\n                System.out.println(\"Ingrese su Nombre de Usuario\");\r\n                System.out.println(\"Ingrese la Contraseña\");\r\n                // Si el usuario es un cliente\r\n                System.out.println(\"QUE DESEA HACER?\");\r\n                System.out.println(\"1. Ver Tarjetas\");\r\n                System.out.println(\"2. Agregar o Retirar Dinero\");\r\n                System.out.println(\"3. Solicitar Tarjeta de Credito\");\r\n                System.out.println(\"4. Salir\");\r\n                String opcion = scanner.nextLine();\r\n\r\n                switch (opcion){\r\n                    case \"1\":\r\n                        if (tarjetaDebito != null) {\r\n                            System.out.println(\"--------- TARJETA DE DEBITO ---------\");\r\n                            System.out.println(tarjetaDebito.toString());\r\n                        } else {\r\n                            System.out.println(\"No se ha creado ninguna tarjeta de débito.\");\r\n                        }\r\n                        break;\r\n                    case \"2\":\r\n                        if (tarjetaDebito != null) {\r\n                            System.out.println(\"1. Agregar dinero\");\r\n                            System.out.println(\"2. Retirar dinero\");\r\n                            String opcionDinero = scanner.nextLine();\r\n\r\n                            switch (opcionDinero) {\r\n                                case \"1\":\r\n                                    System.out.println(\"Ingrese la cantidad a agregar:\");\r\n                                    double cantidadAgregar = scanner.nextDouble();\r\n                                    tarjetaDebito.agregarDinero(cantidadAgregar);\r\n                                    System.out.println(\"Se agregaron \" + cantidadAgregar + \" a la tarjeta\");\r\n                                    break;\r\n                                case \"2\":\r\n                                    System.out.println(\"Ingrese la cantidad a retirar:\");\r\n                                    double cantidadRetirar = scanner.nextDouble();\r\n                                    boolean retirado = tarjetaDebito.retirarDinero(cantidadRetirar);\r\n                                    if (retirado) {\r\n                                        System.out.println(\"Se retiraron \" + cantidadRetirar + \" de la tarjeta\");\r\n                                    }\r\n                                    break;\r\n                                default:\r\n                                    System.out.println(\"Opción no válida\");\r\n                                    break;\r\n                            }\r\n                        } else {\r\n                            System.out.println(\"No se ha creado ninguna tarjeta de débito\");\r\n                        }\r\n                        break;\r\n                    case \"3\":\r\n                        if (tarjetaDebito.getCantidad() >= 50000 || tarjetaDebito.getCantidad() >= 100000 || tarjetaDebito.getCantidad() >= 200000) {\r\n                            if (tarjetaDebito.getCantidad() <= 100000) {\r\n                                System.out.println(\"Puedes solicitar una tarjeta Simplicity \");\r\n                                System.out.println(\"1. Solicitar Simplicity 2. Rechazar\");\r\n                                String opcionSolicitar = scanner.nextLine();\r\n                                switch (opcionSolicitar) {\r\n                                    case \"1\":\r\n\r\n                                        break;\r\n                                    case \"2\":\r\n                                        break;\r\n                                }\r\n                            } else if (tarjetaDebito.getCantidad() <= 200000) {\r\n                                System.out.println(\"Puedes solicitar alguna de las siguientes tarjetas: Simplicity o Platino \");\r\n                                System.out.println(\"1. Solicitar Simplicity 2. Solicitar Platino 3. Rechazar\");\r\n                                String opcionSolicitar = scanner.nextLine();\r\n                                switch (opcionSolicitar) {\r\n                                    case \"1\":\r\n\r\n                                        break;\r\n                                    case \"2\":\r\n\r\n                                        break;\r\n                                    case \"3\":\r\n                                        break;\r\n                                }\r\n                            } else {\r\n                                System.out.println(\"Puedes solicitar alguna de las siguientes tarjetas: Simplicity, Platino u Oro\");\r\n                                System.out.println(\"1. Solicitar Simplicity 2. Solicitar Platino 3. Solicitar Oro\");\r\n                                String opcionSolicitar = scanner.nextLine();\r\n                                switch (opcionSolicitar) {\r\n                                    case \"1\":\r\n\r\n                                        break;\r\n                                    case \"2\":\r\n\r\n                                        break;\r\n                                    case \"3\":\r\n                                        System.out.println(\"dasf\");\r\n                                        break;\r\n                                    case \"4\":\r\n                                        break;\r\n                                }\r\n                            }\r\n                        } else {\r\n                            System.out.println(\"Por el momento no puedes solicitar una tarjeta de credito\");\r\n                        }\r\n                        break;\r\n\r\n                    case \"4\":\r\n                        salir = \"5\";\r\n                        System.out.println(\"Saliendo del programa...\");\r\n                        break;\r\n                    default:\r\n                        System.out.println(\"Opción no válida\");\r\n                }\r\n\r\n                // Si el usuario es ejecutivo de cuenta\r\n                System.out.println(\"Registrar Cliente\");\r\n                //Cuando se da de alta un usurio se ocupa asignarle una tarjeta, para crear una tarjeta esta:\r\n                tarjetaDebito = TarjetasDebito.crearTarjetaDeDebito();\r\n\r\n            } else if (sucursal ==\"2\") {\r\n                System.out.println(\"Ha Ingresado a la Sucursal Acueducto\");\r\n                System.out.println(\"Ingrese su Nombre de Usuario\");\r\n\r\n                System.out.println(\"Ingrese la Contraseña\");\r\n                // Si el usuario es un cliente\r\n                System.out.println(\"QUE DESEA HACER?\");\r\n                System.out.println(\"1. Ver Tarjetas\");\r\n                System.out.println(\"2. Agregar o Retirar Dinero\");\r\n                System.out.println(\"3. Solicitar Tarjeta de Credito\");\r\n                System.out.println(\"4. Salir\");\r\n                String opcion = scanner.nextLine();\r\n\r\n                switch (opcion){\r\n                    case \"1\":\r\n                        if (tarjetaDebito != null) {\r\n                            System.out.println(\"--------- TARJETA DE DEBITO ---------\");\r\n                            System.out.println(tarjetaDebito.toString());\r\n                        } else {\r\n                            System.out.println(\"No se ha creado ninguna tarjeta de débito.\");\r\n                        }\r\n                        break;\r\n                    case \"2\":\r\n                        if (tarjetaDebito != null) {\r\n                            System.out.println(\"1. Agregar dinero\");\r\n                            System.out.println(\"2. Retirar dinero\");\r\n                            String opcionDinero = scanner.nextLine();\r\n\r\n                            switch (opcionDinero) {\r\n                                case \"1\":\r\n                                    System.out.println(\"Ingrese la cantidad a agregar:\");\r\n                                    double cantidadAgregar = scanner.nextDouble();\r\n                                    tarjetaDebito.agregarDinero(cantidadAgregar);\r\n                                    System.out.println(\"Se agregaron \" + cantidadAgregar + \" a la tarjeta\");\r\n                                    break;\r\n                                case \"2\":\r\n                                    System.out.println(\"Ingrese la cantidad a retirar:\");\r\n                                    double cantidadRetirar = scanner.nextDouble();\r\n                                    boolean retirado = tarjetaDebito.retirarDinero(cantidadRetirar);\r\n                                    if (retirado) {\r\n                                        System.out.println(\"Se retiraron \" + cantidadRetirar + \" de la tarjeta\");\r\n                                    }\r\n                                    break;\r\n                                default:\r\n                                    System.out.println(\"Opción no válida\");\r\n                                    break;\r\n                            }\r\n                        } else {\r\n                            System.out.println(\"No se ha creado ninguna tarjeta de débito\");\r\n                        }\r\n                        break;\r\n                    case \"3\":\r\n                        if (tarjetaDebito.getCantidad() >= 50000 || tarjetaDebito.getCantidad() >= 100000 || tarjetaDebito.getCantidad() >= 200000) {\r\n                            if (tarjetaDebito.getCantidad() <= 100000) {\r\n                                System.out.println(\"Puedes solicitar una tarjeta Simplicity \");\r\n                                System.out.println(\"1. Solicitar Simplicity 2. Rechazar\");\r\n                                String opcionSolicitar = scanner.nextLine();\r\n                                switch (opcionSolicitar) {\r\n                                    case \"1\":\r\n\r\n                                        break;\r\n                                    case \"2\":\r\n                                        break;\r\n                                }\r\n                            } else if (tarjetaDebito.getCantidad() <= 200000) {\r\n                                System.out.println(\"Puedes solicitar alguna de las siguientes tarjetas: Simplicity o Platino \");\r\n                                System.out.println(\"1. Solicitar Simplicity 2. Solicitar Platino 3. Rechazar\");\r\n                                String opcionSolicitar = scanner.nextLine();\r\n                                switch (opcionSolicitar) {\r\n                                    case \"1\":\r\n\r\n                                        break;\r\n                                    case \"2\":\r\n\r\n                                        break;\r\n                                    case \"3\":\r\n                                        break;\r\n                                }\r\n                            } else {\r\n                                System.out.println(\"Puedes solicitar alguna de las siguientes tarjetas: Simplicity, Platino u Oro\");\r\n                                System.out.println(\"1. Solicitar Simplicity 2. Solicitar Platino 3. Solicitar Oro\");\r\n                                String opcionSolicitar = scanner.nextLine();\r\n                                switch (opcionSolicitar) {\r\n                                    case \"1\":\r\n\r\n                                        break;\r\n                                    case \"2\":\r\n\r\n                                        break;\r\n                                    case \"3\":\r\n                                        System.out.println(\"dasf\");\r\n                                        break;\r\n                                    case \"4\":\r\n                                        break;\r\n                                }\r\n                            }\r\n                        } else {\r\n                            System.out.println(\"Por el momento no puedes solicitar una tarjeta de credito\");\r\n                        }\r\n                        break;\r\n\r\n                    case \"4\":\r\n                        salir = \"5\";\r\n                        System.out.println(\"Saliendo del programa...\");\r\n                        break;\r\n                    default:\r\n                        System.out.println(\"Opción no válida\");\r\n                }\r\n                // Si el usuario es ejecutivo de cuenta\r\n                System.out.println(\"Registrar Cliente\");\r\n                //Cuando se da de alta un usurio se ocupa asignarle una tarjeta, para crear una tarjeta esta:\r\n                tarjetaDebito = TarjetasDebito.crearTarjetaDeDebito();\r\n\r\n            }\r\n        }\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/Sistema.java b/src/Sistema.java
+--- a/src/Sistema.java	
++++ b/src/Sistema.java	
+@@ -2,7 +2,9 @@
+ 
+ public class Sistema {
+     public void iniciarSistema(){
++
+         String salir = "6";
++
+         TarjetasDebito tarjetaDebito = null;
+ 
+         while (salir != "5") {
+Index: src/Empleados/Sucursal.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Empleados;\r\nimport java.time.LocalDate;\r\nimport utils.Rol;\r\n\r\npublic class Sucursal {\r\n    private String nombreSucursal;\r\n    private String direccionSucursal;\r\n    private GerenteSucursal gerenteSucursal;\r\n\r\n    public Sucursal(String nombreSucursal, String direccionSucursal, GerenteSucursal gerenteSucursal) {\r\n        this.nombreSucursal = nombreSucursal;\r\n        this.direccionSucursal = direccionSucursal;\r\n        this.gerenteSucursal = gerenteSucursal;\r\n    }\r\n\r\n    public String getNombreSucursal() {\r\n        return nombreSucursal;\r\n    }\r\n\r\n    public void setNombreSucursal(String nombreSucursal) {\r\n        this.nombreSucursal = nombreSucursal;\r\n    }\r\n\r\n    public String getDireccionSucursal() {\r\n        return direccionSucursal;\r\n    }\r\n\r\n    public void setDireccionSucursal(String direccionSucursal) {\r\n        this.direccionSucursal = direccionSucursal;\r\n    }\r\n\r\n    public GerenteSucursal getGerenteSucursal() {\r\n        return gerenteSucursal;\r\n    }\r\n\r\n    public void setGerenteSucursal(GerenteSucursal gerenteSucursal) {\r\n        this.gerenteSucursal = gerenteSucursal;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Sucursal{\" +\r\n                \", nombreSucursal='\" + nombreSucursal + '\\'' +\r\n                \", direccionSucursal='\" + direccionSucursal + '\\'' +\r\n                \", gerenteSucursal=\" + gerenteSucursal +\r\n                '}';\r\n    }\r\n\r\n    GerenteSucursal gerenteMadero = new GerenteSucursal(getGerenteSucursal().getIdEmpleado(),\r\n            \"Diana\", \"Campos\", LocalDate.of(1980, 10, 15), \"PEJH801015HMNXXX\", \"PEJH801015MCMNXXX\",\r\n            \"Calle Morelos #456\", null, 50000.00, Rol.GERENTE_SUCURSAL,\r\n            LocalDate.of(2020, 01, 01));\r\n\r\n    SucursalMadero sucursalMadero = new SucursalMadero(\"Madero\", \"Av. Madero #123\", gerenteMadero);\r\n\r\n}\r\n
+===================================================================
+diff --git a/src/Empleados/Sucursal.java b/src/Empleados/Sucursal.java
+--- a/src/Empleados/Sucursal.java	
++++ b/src/Empleados/Sucursal.java	
+@@ -1,6 +1,6 @@
+ package Empleados;
+ import java.time.LocalDate;
+-import utils.Rol;
++import Users.utils.constants.Rol;
+ 
+ public class Sucursal {
+     private String nombreSucursal;
+Index: src/Empleados/Empleado.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Empleados;\r\nimport java.time.LocalDate;\r\nimport utils.Rol;\r\n\r\n\r\npublic class Empleado {\r\n\r\n    private int idEmpleado;\r\n    private String nombre;\r\n    private String apellidos;\r\n    private LocalDate fechaNacimiento;\r\n    private String rfc;\r\n    String CURP;\r\n    private String direccion;\r\n    private Sucursal sucursal;\r\n    private double salario;\r\n    private Rol rol;\r\n    private LocalDate fechaInicioTrabajo;\r\n    private static int nextId = 0;\r\n\r\n\r\n    public Empleado() {\r\n\r\n    }\r\n\r\n    public Empleado(int idEmpleado, String nombre, String apellidos, LocalDate fechaNacimiento, String rfc, String CURP, String direccion, Sucursal sucursal, double salario, Rol rol, LocalDate fechaInicioTrabajo) {\r\n        this.idEmpleado = nextId++;\r\n        this.nombre = nombre;\r\n        this.apellidos = apellidos;\r\n        this.fechaNacimiento = fechaNacimiento;\r\n        this.rfc = rfc;\r\n        this.CURP = CURP;\r\n        this.direccion = direccion;\r\n        this.sucursal = sucursal;\r\n        this.salario = salario;\r\n        this.rol = rol;\r\n        this.fechaInicioTrabajo = fechaInicioTrabajo;\r\n\r\n    }\r\n\r\n    public int getIdEmpleado() {\r\n        return idEmpleado;\r\n    }\r\n\r\n    public void setIdEmpleado(int idEmpleado) {\r\n        this.idEmpleado = idEmpleado;\r\n    }\r\n\r\n    public String getNombre() {\r\n        return nombre;\r\n    }\r\n\r\n    public void setNombre(String nombre) {\r\n        this.nombre = nombre;\r\n    }\r\n\r\n    public String getApellidos() {\r\n        return apellidos;\r\n    }\r\n\r\n    public void setApellidos(String apellidos) {\r\n        this.apellidos = apellidos;\r\n    }\r\n\r\n    public LocalDate getFechaNacimiento() {\r\n        return fechaNacimiento;\r\n    }\r\n\r\n    public void setFechaNacimiento(LocalDate fechaNacimiento) {\r\n        this.fechaNacimiento = fechaNacimiento;\r\n    }\r\n\r\n    public String getRfc() {\r\n        return rfc;\r\n    }\r\n\r\n    public void setRfc(String rfc) {\r\n        this.rfc = rfc;\r\n    }\r\n\r\n    public String getCURP() {\r\n        return CURP;\r\n    }\r\n\r\n    public void setCURP(String CURP) {\r\n        this.CURP = CURP;\r\n    }\r\n\r\n    public String getDireccion() {\r\n        return direccion;\r\n    }\r\n\r\n    public void setDireccion(String direccion) {\r\n        this.direccion = direccion;\r\n    }\r\n\r\n    public Sucursal getSucursal() {\r\n        return sucursal;\r\n    }\r\n\r\n    public void setSucursal(Sucursal sucursal) {\r\n        this.sucursal = sucursal;\r\n    }\r\n\r\n    public double getSalario() {\r\n        return salario;\r\n    }\r\n\r\n    public void setSalario(double salario) {\r\n        this.salario = salario;\r\n    }\r\n\r\n    public Rol getRol() {\r\n        return rol;\r\n    }\r\n\r\n    public void setRol(Rol rol) {\r\n        this.rol = rol;\r\n    }\r\n\r\n    public LocalDate getFechaInicioTrabajo() {\r\n        return fechaInicioTrabajo;\r\n    }\r\n\r\n    public void setFechaInicioTrabajo(LocalDate fechaInicioTrabajo) {\r\n        this.fechaInicioTrabajo = fechaInicioTrabajo;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Empleado{\" +\r\n                \"idEmpleado=\" + idEmpleado +\r\n                \", nombre='\" + nombre + '\\'' +\r\n                \", apellidos='\" + apellidos + '\\'' +\r\n                \", fechaNacimiento=\" + fechaNacimiento +\r\n                \", rfc='\" + rfc + '\\'' +\r\n                \", curp='\" + CURP + '\\'' +\r\n                \", direccion='\" + direccion + '\\'' +\r\n                \", sucursal=\" + sucursal +\r\n                \", salario=\" + salario +\r\n                \", rol=\" + rol +\r\n                \", fechaInicioTrabajo=\" + fechaInicioTrabajo +\r\n                '}';\r\n\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/Empleados/Empleado.java b/src/Empleados/Empleado.java
+--- a/src/Empleados/Empleado.java	
++++ b/src/Empleados/Empleado.java	
+@@ -1,6 +1,6 @@
+ package Empleados;
+ import java.time.LocalDate;
+-import utils.Rol;
++import Users.utils.constants.Rol;
+ 
+ 
+ public class Empleado {
+Index: src/Empleados/GerenteSucursal.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Empleados;\r\nimport java.time.LocalDate;\r\nimport utils.Rol;\r\n\r\npublic class GerenteSucursal extends Empleado {\r\n\r\n\r\n    public GerenteSucursal() {\r\n        super();\r\n    }\r\n\r\n\r\n    public GerenteSucursal(int idEmpleado, String nombre, String apellidos, LocalDate fechaNacimiento,\r\n                           String rfc, String CURP, String direccion,\r\n                           Sucursal sucursal, double salario, Rol rol, LocalDate fechaInicioTrabajo) {\r\n        super(idEmpleado, nombre, apellidos, fechaNacimiento, rfc, CURP, direccion,\r\n                sucursal, salario, Rol.GERENTE_SUCURSAL, fechaInicioTrabajo);\r\n    }\r\n\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"GerenteSucursal{\" +\r\n                \", \" + super.toString() +\r\n                '}';\r\n    }\r\n\r\n\r\n\r\n    public void autorizarSolicitudTarjetaCredito() {\r\n\r\n    }\r\n\r\n    private void rechazarSolicitudTarjetaCredito (){\r\n\r\n    }\r\n\r\n}\r\n\r\n
+===================================================================
+diff --git a/src/Empleados/GerenteSucursal.java b/src/Empleados/GerenteSucursal.java
+--- a/src/Empleados/GerenteSucursal.java	
++++ b/src/Empleados/GerenteSucursal.java	
+@@ -1,6 +1,6 @@
+ package Empleados;
+ import java.time.LocalDate;
+-import utils.Rol;
++import Users.utils.constants.Rol;
+ 
+ public class GerenteSucursal extends Empleado {
+ 
+Index: src/Empleados/SucursalMadero.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Empleados;\r\nimport utils.Rol;\r\nimport java.time.LocalDate;\r\n\r\npublic class SucursalMadero extends Sucursal{\r\n\r\n    public SucursalMadero(String nombreSucursal, String direccionSucursal, GerenteSucursal gerenteMadero) {\r\n        super(nombreSucursal, direccionSucursal, gerenteMadero);\r\n    }\r\n\r\n    /*GerenteSucursal gerenteMadero = new GerenteSucursal(getGerenteSucursal().getIdEmpleado(),\r\n            \"Diana\", \"Campos\", LocalDate. of(1980, 10, 15),\"PEJH801015HMNXXX\", \"PEJH801015MCMNXXX\",\r\n            \"Calle Morelos #456\", null, 50000.00, Rol.GERENTE_SUCURSAL,\r\n            LocalDate.of(2020, 01, 01));*/\r\n\r\n}\r\n
+===================================================================
+diff --git a/src/Empleados/SucursalMadero.java b/src/Empleados/SucursalMadero.java
+--- a/src/Empleados/SucursalMadero.java	
++++ b/src/Empleados/SucursalMadero.java	
+@@ -1,6 +1,4 @@
+ package Empleados;
+-import utils.Rol;
+-import java.time.LocalDate;
+ 
+ public class SucursalMadero extends Sucursal{
+ 

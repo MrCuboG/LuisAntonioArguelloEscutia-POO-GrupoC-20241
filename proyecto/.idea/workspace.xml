@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="60270c93-0123-4f3e-9cf8-60c990fa4273" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Examen/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/Examen.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/Empleados/Empleado.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/Empleados/GerenteSucursal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/Empleados/Sucursal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/Empleados/SucursalMadero.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/Menus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/Sistema.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/TarjetaOro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/TarjetaPlatino.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/TarjetaSimplicity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/Tarjetas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/TarjetasDebito.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/Users/Cliente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/Users/Inversionista.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/Users/Rol.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/Users/Usuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Examen/src/utils/Rol.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Libreria/libros/utils/LibrosUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Libreria/Libreria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Libreria/Libreria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Libreria/Libro.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Libreria/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Libreria/Menu.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2g7SQX42qY8rj2pruzwEAfnF4fB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ejercicioLibreria/parte5&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mrcub/Documents/POO/LuisAntonioArguelloEscutia-POO-GrupoC-20241/proyecto&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="60270c93-0123-4f3e-9cf8-60c990fa4273" name="Changes" comment="" />
+      <created>1715047106664</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1715047106664</updated>
+      <workItem from="1715047107753" duration="113000" />
+      <workItem from="1715090708055" duration="81000" />
+      <workItem from="1715092935464" duration="8000" />
+      <workItem from="1715092957821" duration="40000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
