@@ -1,0 +1,7 @@
+public enum Rol {
+    GERENTE,
+    EJECUTIVO_CUENTA,
+    CAPTURISTA,
+    INVERSIONISTA,
+    CLIENTE;
+}

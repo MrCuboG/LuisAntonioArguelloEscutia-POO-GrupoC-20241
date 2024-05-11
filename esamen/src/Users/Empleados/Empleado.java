@@ -13,10 +13,9 @@ public class Empleado extends Usuario {
     protected LocalDate fechaInicioTrabajo;
     private static int contadorIdEmpleado = 1;
 
-    public Empleado(String nombre, String apellido, String ciudad, String estado, String direccion, String nacimiento, String rfc, String curp, String user, String password, Rol rol, Sucursal sucursal, double salario, LocalDate fechaInicioTrabajo) {
+    public Empleado(String nombre, String apellido, String direccion, String nacimiento, String rfc, String curp, String user, String password, Rol rol, double salario, LocalDate fechaInicioTrabajo) {
         super(nombre, apellido, direccion, nacimiento, rfc, curp, user, password, rol);
         this.idEmpleado = contadorIdEmpleado++;
-        this.sucursal = sucursal;
         this.salario = salario;
         this.fechaInicioTrabajo = fechaInicioTrabajo;
     }

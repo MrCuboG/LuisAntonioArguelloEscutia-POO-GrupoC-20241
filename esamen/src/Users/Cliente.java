@@ -1,45 +1,69 @@
 package Users;
-
-import Users.utils.UsuarioUtils;
 import Users.utils.constantes.Rol;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+
 import java.util.Scanner;
-import java.time.LocalDateTime;
-
-
+import java.util.ArrayList;
 
 public class Cliente extends Usuario {
     private final String fechaRegistroStr;
+    private int id;
+    private ArrayList<SolicitudTarjeta> solicitudesTarjeta = new ArrayList<SolicitudTarjeta>();
+    private TarjetasDebito tarjetaDebito;
 
-    //PORFA ALGUIEN AGREGUE EL ID PORQUE FALTA EN CLIENTE
 
-
-    public Cliente(String nombre, String apellido, String domicilio, String nacimiento, String rfc, String curp, String user, String password, String fechaRegistroStr) {
+    public Cliente(String nombre, String apellido, String domicilio, String nacimiento, String rfc, String curp, String user, String password, String fechaRegistroStr, int id) {
         super(nombre, apellido, domicilio, nacimiento, rfc, curp, user, password, Rol.CLIENTE);
         this.fechaRegistroStr = fechaRegistroStr;
+        this.id = id;
     }
 
-    public void RegistarCliente() {
-        Scanner sc = new Scanner(System.in);
-        ArrayList<String> datos = UsuarioUtils.registarUsuarioComun();
-
-        String nombre = datos.get(0);
-        String apellido = datos.get(1);
-        String domicilio = datos.get(2);
-        String nacimiento = datos.get(3);
-        String rfc = datos.get(4);
-        String curp = datos.get(5);
-        String user = datos.get(6);
-        String password = datos.get(7);
-        System.out.println("Fecha de registro");
-        String fechaRegistro = sc.nextLine();
-
-        Cliente cliente = new Cliente(nombre, apellido, domicilio, nacimiento, rfc, curp, user, password, fechaRegistro);
+    public Cliente(int id, String nombre, String apellido, String domicilio, String nacimiento, String rfc, String curp, String user, String password, String fechaRegistroStr) {
+        super(nombre, apellido, domicilio, nacimiento, rfc, curp, user, password, Rol.CLIENTE);
+        this.fechaRegistroStr = fechaRegistroStr;
+        this.id = id;
     }
 
+    public void setTarjetaDebito(TarjetasDebito tarjetaDebito) {
+        this.tarjetaDebito = tarjetaDebito;
+    }
+
+    public void solicitarTarjetaDeCredito(TipoTarjeta tipoTarjeta) {
+        if (tarjetaDebito != null) {
+            double saldoActual = tarjetaDebito.getCantidad();
+            double saldoMinimoRequerido = 0;
+
+            switch (tipoTarjeta) {
+                case SIMPLICITY:
+                    saldoMinimoRequerido = 50000;
+                    break;
+                case PLATINO:
+                    saldoMinimoRequerido = 100000;
+                    break;
+                case ORO:
+                    saldoMinimoRequerido = 200000;
+                    break;
+            }
+
+            if (saldoActual >= saldoMinimoRequerido) {
+                SolicitudTarjeta solicitud = new SolicitudTarjeta(this, tipoTarjeta);
+                solicitudesTarjeta.add(solicitud);
+                System.out.println("Solicitud de tarjeta de crédito " + tipoTarjeta + " enviada correctamente.");
+            } else {
+                System.out.println("No tienes suficiente saldo para solicitar una tarjeta de crédito " + tipoTarjeta + ".");
+            }
+        } else {
+            System.out.println("Debes tener una tarjeta de débito para solicitar una tarjeta de crédito.");
+        }
+    }
+
+    public ArrayList<SolicitudTarjeta> getSolicitudesTarjeta() {
+        return solicitudesTarjeta;
+    }
 }
+
 
 //    public String getNombre() {
 //        return nombre;

@@ -11,6 +11,8 @@ import java.util.Scanner;
 //IGNOREN ESTA CLASE ES INUTIL POR EL MOMENTO
 import Sucursales.Sucursal;
 import Users.*;
+import Users.Empleados.Gerente;
+import Users.utils.constantes.Rol;
 import utils.UsuarioEnSesion;
 
 public class Menus {
@@ -18,39 +20,29 @@ public class Menus {
     Scanner scanner = new Scanner(System.in);
 
     String salir = "6";
-    public void inicioSesion(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("-------------------- BANCO --------------------");
-        System.out.println("            BIENVENIDO AL SISTEMA");
-        System.out.println("Ingrese su usuario:");
-        String usuario = scanner.nextLine();
-        System.out.println("Ingrese su contraseña:");
-        String contrasena = scanner.nextLine();
-        Sistema sistema = new Sistema();
-        sistema.verificarInicioSesion();
-    }
 
-    public void iniciarSesion() {
+    public void inicioSesion() {
         Scanner scanner = new Scanner(System.in);
         boolean datosCorrectos = false;
+
         do {
-            System.out.println("Bienvenido al sistema de la Biblioteca");
+            System.out.println("Bienvenido al sistema del Banco");
             System.out.println("Para continuar sesión\n");
             System.out.println("Ingresa tu usuario: ");
             String usuario = scanner.nextLine();
 
             System.out.println("Ingresa tu contraseña: ");
             String contrasena = scanner.nextLine();
-            Usuario usuarioActual = Sucursal.verificarInicioSesion(usuario, contrasena);
+            Usuario usuarioActual = Sucursal.obtenerUsuarioPorNombreYContrasena(usuario, contrasena);
             if (usuarioActual != null) {
                 datosCorrectos = true;
                 UsuarioEnSesion.obtenerInstancia().setUsuarioActual(usuarioActual);
                 seleccionarMenu();
             } else {
                 System.out.println("\nUsuario o contraseña incorrectos.");
-                datosCorrectos = true;
+                datosCorrectos = false;
             }
-        } while (datosCorrectos == true);
+        } while (datosCorrectos);
     }
     private void seleccionarMenu() {
         Usuario usuario = UsuarioEnSesion.obtenerInstancia().getUsuarioActual();
@@ -69,6 +61,67 @@ public class Menus {
                 break;
         }
     }
+    public void mostrarMenuGerente(String nombreUsuario){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("----------------GERENTE----------------");
+        System.out.println("1.Operaciones relacionadas a los clientes");
+        System.out.println("2. Solicitudes de tarjetas");
+        System.out.println("3. Realizar registro de clientes");
+        System.out.println("4. Realizar modificaciones a los clientes");
+        System.out.println("5. Ver historial de inversion");
+        System.out.println("3. Salir");
+        int opcion = scanner.nextInt();
+        switch (opcion){
+            case 1:
+                //Menu.EjecutivoDeCuentaClientes()
+                break;
+            case 2:
+                //Menu.EjecutivoDeCuentaTarjetas()
+                break;
+        }
+    }
+
+    public void mostrarMenuEjecutivoDeCuentas(String nombreUsuario){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("----------------EJECUTIVO DE CUENTAS----------------");
+        System.out.println("1.Operaciones relacionadas a los clientes");
+        System.out.println("2. Solicitudes de tarjetas");
+        System.out.println("3. Salir");
+        int opcion = scanner.nextInt();
+        switch (opcion){
+            case 1:
+                //Menu.EjecutivoDeCuentaClientes()
+                break;
+            case 2:
+                //Menu.EjecutivoDeCuentaTarjetas()
+                break;
+        }
+    }
+    public void mostrarMenuCapturista(String nombreUsuario) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("----------------CAPTURISTA----------------");
+        System.out.println("1. Realizar registro de clientes");
+        System.out.println("2. Realizar modificaciones a los clientes");
+        System.out.println("3. Salir");
+        int opcion = scanner.nextInt();
+        switch (opcion) {
+            case 1:
+                //Menu.RegistroClientes()
+                break;
+            case 2:
+                //Menu.ModificacionClientes()
+                break;
+            case 3:
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Opción inválida, por favor intente nuevamente.");
+                mostrarMenuCapturista(nombreUsuario);
+                break;
+        }
+    }
+
+
 
     public void mostrarMenuInversionista(String nombreUsuario){
         Scanner scanner = new Scanner(System.in);

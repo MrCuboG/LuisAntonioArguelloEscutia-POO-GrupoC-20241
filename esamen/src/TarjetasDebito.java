@@ -55,10 +55,4 @@ public class TarjetasDebito extends Tarjetas {
         return super.retirarDinero(cantidad);
     }
 
-    public double obtenerSaldoDisponible(){
-        return this.getCantidad();
-    }
-
-
-
 }

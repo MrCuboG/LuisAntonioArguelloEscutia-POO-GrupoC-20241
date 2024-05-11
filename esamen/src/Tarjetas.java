@@ -1,9 +1,10 @@
 import java.time.LocalDateTime;
 
+
 public class Tarjetas {
     private String numTarjeta;
     private String clabeInterbancaria;
-    private double cantidad;
+    protected double cantidad;
     private String CVV;
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaDeVencimiento;
