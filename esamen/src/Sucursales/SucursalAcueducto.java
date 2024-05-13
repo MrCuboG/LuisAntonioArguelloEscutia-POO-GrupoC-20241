@@ -1,24 +1,27 @@
 package Sucursales;
 
 import Users.Empleados.Empleado;
+import Users.Empleados.GerenteSucursal;
 import Users.Inversionista;
 import Users.Usuario;
 import Users.utils.constantes.Rol;
-import Users.Empleados.GerenteSucursal;
-import java.time.LocalDate;
-import java.util.*;
 
-public class SucursalMadero extends Sucursal{
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class SucursalAcueducto extends Sucursal{
 
     private static int contadorIdEmpleado = 1;
     int idGerente = 1;
     static HashMap<Rol, ArrayList<Empleado>> empleados = new HashMap<>();
     static HashMap<Rol, ArrayList<Inversionista>> inversionistas = new HashMap<>();
 
-    GerenteSucursal gerenteMadero = new GerenteSucursal(idGerente,"Diana", "Campos Rosas", LocalDate. of(2005, 10, 24),"Morelia","Michoacán",
-            "CARD051024MMNMSNA5","Calle Morelos #456", this, 50000.00,Rol.GERENTE_SUCURSAL,LocalDate.of(2020, 01, 01), "a", "d");
+    GerenteSucursal gerenteAcueducto = new GerenteSucursal(idGerente,"Diana", "Campos Rosas", LocalDate. of(2005, 10, 24),"Morelia","Michoacán",
+            "CARD051024MMNMSNA5","Calle Morelos #456", this, 50000.00,Rol.GERENTE_SUCURSAL,LocalDate.of(2020, 01, 01), "a", "e");
 
-    public SucursalMadero(String nombreSucursal, String direccionSucursal) {
+    public SucursalAcueducto(String nombreSucursal, String direccionSucursal) {
         super( "Madero","Av. Madero #123");
         empleados.put(Rol.GERENTE_SUCURSAL, new ArrayList<>());
         empleados.put(Rol.INVERSIONISTA, new ArrayList<>());
@@ -26,16 +29,16 @@ public class SucursalMadero extends Sucursal{
         empleados.put(Rol.EJECUTIVO_CUENTA, new ArrayList<>());
         empleados.put(Rol.CAPTURISTA, new ArrayList<>());
         empleados.put(Rol.CLIENTE, new ArrayList<>());
-        empleados.get(Rol.GERENTE_SUCURSAL).add(gerenteMadero);
+        empleados.get(Rol.GERENTE_SUCURSAL).add(gerenteAcueducto);
     }
 
-    public SucursalMadero(String nombreSucursal, String direccionSucursal, GerenteSucursal gerenteSucursal) {
+    public SucursalAcueducto(String nombreSucursal, String direccionSucursal, GerenteSucursal gerenteSucursal) {
         super(nombreSucursal, direccionSucursal);
-        this.gerenteMadero = gerenteSucursal;
+        this.gerenteAcueducto = gerenteSucursal;
     }
 
     public GerenteSucursal getGerente() {
-        return gerenteMadero;
+        return gerenteAcueducto;
     }
 
     @Override

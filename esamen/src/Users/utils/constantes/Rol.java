@@ -1,7 +1,10 @@
 package Users.utils.constantes;
 
+import Sucursales.Sucursal;
+
 public enum Rol {
-    GERENTE,
+    GERENTE_SUCURSAL,
+    EMPLEADO,
     EJECUTIVO_CUENTA,
     CAPTURISTA,
     INVERSIONISTA,

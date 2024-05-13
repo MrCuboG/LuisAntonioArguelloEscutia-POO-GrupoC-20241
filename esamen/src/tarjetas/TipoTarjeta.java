@@ -1,3 +1,4 @@
+package tarjetas;
 
 public enum TipoTarjeta {
     SIMPLICITY,

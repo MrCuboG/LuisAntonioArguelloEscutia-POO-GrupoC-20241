@@ -32,4 +32,28 @@ public class Usuario {
     public Rol getRol() {
         return rol;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setNacimiento(String nacimiento) {
+        this.nacimiento = nacimiento;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

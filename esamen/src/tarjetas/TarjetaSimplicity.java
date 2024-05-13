@@ -1,14 +1,16 @@
+package tarjetas;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class TarjetaOro extends Tarjetas {
-    private static final double CREDITO_MAXIMO = 250000;
+public class TarjetaSimplicity extends Tarjetas {
+    private static final double CREDITO_MAXIMO = 60000;
 
-    public TarjetaOro(String numTarjeta, String clabeInterbancaria, double cantidad, String CVV, LocalDateTime fechaCreacion, LocalDateTime fechaDeVencimiento, LocalDateTime ultimoMovimiento) {
+    public TarjetaSimplicity(String numTarjeta, String clabeInterbancaria, double cantidad, String CVV, LocalDateTime fechaCreacion, LocalDateTime fechaDeVencimiento, LocalDateTime ultimoMovimiento) {
         super(numTarjeta, clabeInterbancaria, cantidad, CVV, fechaCreacion, fechaDeVencimiento, ultimoMovimiento);
     }
 
-    public static TarjetaOro crearTarjetaOro() {
+    public static TarjetaSimplicity crearTarjetaSimplicity() {
         long numeroAleatorio = (long) (Math.random() * 10000000000000000L);
         String numeroTarjeta = String.format("%016d", numeroAleatorio);
 
@@ -24,14 +26,14 @@ public class TarjetaOro extends Tarjetas {
         LocalDateTime fechaDeVencimiento = fechaCreacion.plusYears(5);
         LocalDateTime ultimoMovimiento = LocalDateTime.now();
 
-        return new TarjetaOro(numeroTarjeta, clabeInterbancaria, cantidad, CVV, fechaCreacion, fechaDeVencimiento, ultimoMovimiento);
+        return new TarjetaSimplicity(numeroTarjeta, clabeInterbancaria, cantidad, CVV, fechaCreacion, fechaDeVencimiento, ultimoMovimiento);
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        return "Tarjeta Oro:\n" +
+        return "Tarjeta Simplicity:\n" +
                 "Número de tarjeta: " + this.getNumTarjeta() + "\n" +
                 "Clabe Interbancaria: " + super.getClabeInterbancaria() + "\n" +
                 "Saldo: " + this.getCantidad() + "\n" +
@@ -53,14 +55,14 @@ public class TarjetaOro extends Tarjetas {
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
-    ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////
     public void ajustarLimiteCredito(double cantidad) {
         double nuevoLimite = CREDITO_MAXIMO - cantidad;
         if (nuevoLimite >= 0) {
-            setCantidad(nuevoLimite);
+            this.setCantidad(nuevoLimite);
         } else {
             System.out.println("");
         }
     }
-    /////////////////////////////////////////
+/////////////////////////////////////////////
 }

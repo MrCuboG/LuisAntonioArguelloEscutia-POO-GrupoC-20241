@@ -1,37 +1,42 @@
+package tarjetas;
+
 import java.time.LocalDateTime;
+import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 
-public class TarjetaSimplicity extends Tarjetas {
-    private static final double CREDITO_MAXIMO = 60000;
-
-    public TarjetaSimplicity(String numTarjeta, String clabeInterbancaria, double cantidad, String CVV, LocalDateTime fechaCreacion, LocalDateTime fechaDeVencimiento, LocalDateTime ultimoMovimiento) {
+public class TarjetasDebito extends Tarjetas {
+    public TarjetasDebito(String numTarjeta, String clabeInterbancaria, double cantidad, String CVV, LocalDateTime fechaCreacion, LocalDateTime fechaDeVencimiento, LocalDateTime ultimoMovimiento) {
         super(numTarjeta, clabeInterbancaria, cantidad, CVV, fechaCreacion, fechaDeVencimiento, ultimoMovimiento);
     }
 
-    public static TarjetaSimplicity crearTarjetaSimplicity() {
+    public static TarjetasDebito crearTarjetaDeDebito() {
+        Scanner scanner = new Scanner(System.in);
         long numeroAleatorio = (long) (Math.random() * 10000000000000000L);
         String numeroTarjeta = String.format("%016d", numeroAleatorio);
+        System.out.println("El numero de su tarjeta va a ser: " + numeroTarjeta);
 
         numeroAleatorio = (long) (Math.random() * 10000000000000000L);
         String clabeInterbancaria = String.format("%016d", numeroAleatorio);
+        System.out.println("Su Clabe Interbancaria es: " + clabeInterbancaria);
 
         int numAleatorio = (int) (Math.random() * 100);
         String CVV = String.format("%03d", numAleatorio);
+        System.out.println("Su CVV es: " + CVV);
 
-        double cantidad = CREDITO_MAXIMO;
+        System.out.println("Ingrese el saldo de la tarjeta:");
+        double cantidad = scanner.nextDouble();
 
         LocalDateTime fechaCreacion = LocalDateTime.now();
         LocalDateTime fechaDeVencimiento = fechaCreacion.plusYears(5);
         LocalDateTime ultimoMovimiento = LocalDateTime.now();
-
-        return new TarjetaSimplicity(numeroTarjeta, clabeInterbancaria, cantidad, CVV, fechaCreacion, fechaDeVencimiento, ultimoMovimiento);
+        TarjetasDebito tarjetaDebito = new TarjetasDebito(numeroTarjeta, clabeInterbancaria, cantidad, CVV, fechaCreacion, fechaDeVencimiento, ultimoMovimiento);
+        return tarjetaDebito;
     }
-
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        return "Tarjeta Simplicity:\n" +
+        return "Tarjeta de Débito:\n" +
                 "Número de tarjeta: " + this.getNumTarjeta() + "\n" +
                 "Clabe Interbancaria: " + super.getClabeInterbancaria() + "\n" +
                 "Saldo: " + this.getCantidad() + "\n" +
@@ -50,17 +55,5 @@ public class TarjetaSimplicity extends Tarjetas {
     public boolean retirarDinero(double cantidad) {
         return super.retirarDinero(cantidad);
     }
-    public void setCantidad(double cantidad) {
-        this.cantidad = cantidad;
-    }
-///////////////////////////////////////////////////
-    public void ajustarLimiteCredito(double cantidad) {
-        double nuevoLimite = CREDITO_MAXIMO - cantidad;
-        if (nuevoLimite >= 0) {
-            this.setCantidad(nuevoLimite);
-        } else {
-            System.out.println("");
-        }
-    }
-/////////////////////////////////////////////
+
 }

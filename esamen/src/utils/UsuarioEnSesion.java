@@ -1,10 +1,11 @@
 package utils;
+import Users.Empleados.Empleado;
 import Users.Usuario;
 
 public class UsuarioEnSesion {
 
     private static UsuarioEnSesion instancia;
-    private Usuario usuarioActual;
+    private Empleado usuarioActual;
 
     private UsuarioEnSesion() {
     }
@@ -17,11 +18,11 @@ public class UsuarioEnSesion {
         return instancia;
     }
 
-    public Usuario getUsuarioActual() {
+    public Empleado getUsuarioActual() {
         return usuarioActual;
     }
 
-    public void setUsuarioActual(Usuario usuarioActual) {
+    public void setUsuarioActual(Empleado usuarioActual) {
         this.usuarioActual = usuarioActual;
     }
 
