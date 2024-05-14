@@ -11,8 +11,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Cliente{
-    /*private final String fechaRegistroStr;
-    private int id;*/
+    private final String fechaRegistroStr;
+    private int id;
     private String nombre;
     private String apellidos;
     private String añoNacimiento;

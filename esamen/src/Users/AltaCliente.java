@@ -76,7 +76,6 @@ public class AltaCliente {
 
         System.out.println(cliente.toString());
 
-
         System.out.println("\n** Cliente dado de alta con éxito! **");
 
         sc.close();

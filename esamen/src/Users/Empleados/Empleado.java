@@ -148,9 +148,6 @@ public class Empleado{
         this.nombreUsuario = nombreUsuario;
     }
 
-
-
-
     public String generarRFC() {
         String homonimo = "";
         if (apellidos.length() > 1) {
@@ -175,7 +172,7 @@ public class Empleado{
         }
 
 
-        return homonimo +primeraLetraApellidoMaterno+nombre+ fechaNacimientoStr ;
+        return homonimo.toUpperCase() +primeraLetraApellidoMaterno.toUpperCase()+nombre.toUpperCase()+ fechaNacimientoStr ;
     }
 
     @Override

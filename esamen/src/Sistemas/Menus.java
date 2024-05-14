@@ -36,30 +36,55 @@ public class Menus {
         boolean datosIncorrectos = false;
 
         do {
-            System.out.println("Bienvenido al sistema del Banco");
-            System.out.println("A cuál sucursal le gustaría ingresar?");
+            //El Gerente de madero es b y la contraseña es a
+            System.out.println("------------------------- BIENVENIDO AL SISTEMA DEL BANCO -------------------------");
+            System.out.println("Ingrese la Sucural a la Que Desea Ingresar");
             System.out.println("1.Madero");
             System.out.println("2.Acueducto");
-            sucur = scanner.nextInt();
-            scanner.nextLine();
+            System.out.println("3, Cerrar Programa");
+
+            String input = scanner.nextLine();
+
+            try {
+                sucur = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, ingresa un número válido.");
+                datosIncorrectos = true;
+                continue;
+            }
+
+            if (sucur == 3) {
+                break;
+            } else if (sucur != 1 & sucur != 2 & sucur != 3){
+                System.out.println("Ingresa Una Opción Valida");
+                datosIncorrectos = true;
+                continue;
+            }
+
             while (true) {
-                System.out.println("Para continuar sesión\n");
-                System.out.println("Ingresa tu usuario: ");
-                String usuario = scanner.nextLine();
-                System.out.println("Ingresa tu contraseña: ");
-                String contrasena = scanner.nextLine();
-                if (sucur == 1) {
+                if (sucur == 1){
+                    System.out.println("BIENVENIDO A LA SUCURSAL MADERO\n");
+                    System.out.println("Ingresa tu Usuario: ");
+                    String usuario = scanner.nextLine();
+                    System.out.println("Ingresa tu Contraseña: ");
+                    String contrasena = scanner.nextLine();
                     usuarioActual = verificarInicioSesionMadero(usuario, contrasena);
+
                     if (usuarioActual != null) {
                         datosIncorrectos = false;
                         UsuarioEnSesion.obtenerInstancia().setUsuarioActual(usuarioActual);
                         seleccionarMenu();
                         break;
                     } else {
-                        System.out.println("\nUsuario o contraseña incorrectos.");
+                        System.out.println("\nUsuario o Contraseña Incorrectos");
                         datosIncorrectos = true;
                     }
-                }else if (sucur == 2) {
+                } else if (sucur == 2){
+                    System.out.println("BIENVENIDO A LA SUCURSAL ACUEDUCTO\n");
+                    System.out.println("Ingresa tu Usuario: ");
+                    String usuario = scanner.nextLine();
+                    System.out.println("Ingresa tu Contraseña: ");
+                    String contrasena = scanner.nextLine();
                     usuarioActual = verificarInicioSesionMadero(usuario, contrasena);
                     if (usuarioActual != null) {
                         datosIncorrectos = false;
@@ -67,7 +92,7 @@ public class Menus {
                         seleccionarMenu();
                         break;
                     } else {
-                        System.out.println("\nUsuario o contraseña incorrectos.");
+                        System.out.println("\nUsuario o Contraseña Incorrectos.");
                         datosIncorrectos = true;
                     }
                 }
@@ -289,7 +314,7 @@ public class Menus {
         static Scanner scaner = new Scanner(System.in);
 
 
-    public static void mostrarMenuEmpleado (){
+    public static void mostrarMenuEmpleado(){
         //////////////////ASIGNAR GERENTE POR DEFAULT EN SUCURSAL MADERO
 
         int idGerenteMadero = 1;
@@ -442,6 +467,7 @@ public class Menus {
                             System.out.print("Ingrese el nombre de usuario del ejecutivo de cuenta que desea eliminar: ");
                             String nombreUsuario2= scan.nextLine();
                             eliminarEjecutivoMadero(nombreUsuario2);
+                            break;
                         case 4:
                             mostrarEjecutivosRegistradosMadero();
                             break;
@@ -459,7 +485,6 @@ public class Menus {
                             eliminarCapturistaMadero(nombreUsuario4);
                             break;
                         case 8: //Registrar cliente
-
                             s.DarAltaCliente();
                             break;
                         case 9://Modificar datos del cliente
@@ -476,7 +501,6 @@ public class Menus {
 
                             break;
                         case 12: //Registrar inversionista
-
                             break;
                         case 13: //Modificar inversionista
                             break;
@@ -489,91 +513,9 @@ public class Menus {
                 }while (opcion!=15);
                 inicioSesion();
         }
-    public static void menuGerenteAcueducto(){
-        Scanner scan = new Scanner(System.in);
-        System.out.print("Ingrese su nombre de usuario: ");
-        String nombreUsuario = scan.nextLine();
-        System.out.print("Ingrese su contraseña: ");
-        String contraseña = scan.nextLine();
-        AltaCliente s = new AltaCliente();
 
-        boolean usuarioValido = false;
-        if (gerenteAcueducto.getNombreUsuario().equals(nombreUsuario) && gerenteMadero.getContraseña().equals(contraseña)) {
-            usuarioValido = true;
-        }
-        if (usuarioValido){
-            int opcion;
-            do{
-                System.out.println("¿Qué desea hacer? ");
-                System.out.println("1. Registrar ejecutivo de cuenta\n2. Modificar ejecutivo de cuenta"
-                        + "\n3.Eliminar ejecutivo de cuenta\n4. Mostrar ejecutivos de cuenta registrados en la sucursal Madero"
-                        + "\n5. Registrar capturista\n6. Modificar capturista\n7.Eliminar capturista\n8. Registrar cliente"
-                        + "\n9.Modificar cliente\n10.Eliminar cliente\n11. Autorizar tarjeta de crédito\n"
-                        + "12. Registrar inversionista\n13. Modificar inversionista\n14. Eliminar inversionisrta\n15. Salir");
-                opcion= scan.nextInt();
-                switch (opcion){
-                    case 1:
-                        registrarEjecutivoDeCuentaAcueducto();
-                        break;
-                    case 2:
-                        scan.nextLine();
-                        System.out.print("Ingrese el nombre de usuario del ejecutivo de cuenta que desea modificar: ");
-                        String nombreUsuario1= scan.nextLine();
-                        modificarEjecutivosAcueducto(nombreUsuario1);
-                        break;
-                    case 3:
-                        System.out.print("Ingrese el nombre de usuario del ejecutivo de cuenta que desea eliminar: ");
-                        String nombreUsuario2= scan.nextLine();
-                        eliminarEjecutivoAcueducto(nombreUsuario2);
-                    case 4:
-                        mostrarEjecutivosRegistradosAcueducto();
-                        break;
-                    case 5:
-                        registrarCapturistaAcueducto();
-                        break;
-                    case 6:
-                        System.out.print("Ingrese el nombre de usuario del capturista que desea modificar: ");
-                        String nombreUsuario3= scan.nextLine();
-                        modificarCapturistaAcueducto(nombreUsuario3);
-                        break;
-                    case 7:
-                        System.out.print("Ingrese el nombre de usuario del capturista que desea eliminar: ");
-                        String nombreUsuario4= scan.nextLine();
-                        eliminarCapturistaAcueducto(nombreUsuario4);
-                        break;
-                    case 8: //Registrar cliente
-                        s.DarAltaCliente();
-                        break;
-                    case 9://Modificar datos del cliente
-                        s.modificarDatosCliente();
-                        break;
+    //MADERO
 
-                    case 10: //Eliminar cliente
-                        System.out.print("Ingrese el nombre de usuario del cliente que desea eliminar: ");
-                        String nombreUsuario5= scan.nextLine();
-                        s.eliminarCliente(nombreUsuario5);
-                        break;
-
-                    case 11: //Autorizar tarjeta de crédito
-
-                        break;
-                    case 12: //Registrar inversionista
-
-                        break;
-                    case 13:
-                        break;
-                    case 14:
-                        break;
-                    case 15:
-                        break;
-
-                }
-            }while (opcion!=15);
-            inicioSesion();
-        }else {
-            System.out.println("Usuario o contraseña incorrectos.");
-        }
-    }
     public static void menuCapturistaMadero(){
 
         // Solicitar nombre de usuario y contraseña
@@ -623,202 +565,6 @@ public class Menus {
             System.out.println("Usuario o contraseña incorrectos.");
         }
     }
-
-
-    public static void registrarEjecutivoDeCuentaMadero(){
-
-        Scanner scanner1= new Scanner(System.in);
-        System.out.println("\n**Registro de empleado con rol de ejecutivo de cuenta en sucursal Madero**");
-
-        System.out.print("Nombre: ");
-        String nombre = scanner1.nextLine();
-
-        System.out.print("Apellidos: ");
-        String apellidos = scanner1.nextLine();
-
-        System.out.print("Dirección: ");
-        String direccion = scanner1.nextLine();
-
-        boolean datoValido = false;
-        LocalDate fechaNacimiento= LocalDate.now();
-        while(!datoValido){
-            try {
-                System.out.print("Fecha de nacimiento (YYYY-MM-DD): ");
-                String fechaNacimientoString = scanner1.nextLine();
-                fechaNacimiento = LocalDate.parse(fechaNacimientoString, DateTimeFormatter.ISO_DATE);
-                break;
-            }
-            catch(Exception error){
-                System.out.println("Ingrese la fecha con el formato adecuado (YYYY-MM-DD)");
-                datoValido=false;
-                scaner.nextLine();
-            }
-        }
-
-        boolean datoValido2 = false;
-        LocalDate fechaIngreso= LocalDate.now();
-        while(!datoValido2){
-            try {
-                System.out.print("Fecha de ingreso (YYYY-MM-DD): ");
-                String fechaIngresoString = scanner1.nextLine();
-                fechaIngreso = LocalDate.parse(fechaIngresoString, DateTimeFormatter.ISO_DATE);
-                break;                }
-            catch(Exception error){
-                System.out.println("Ingrese la fecha con el formato adecuado (YYYY-MM-DD)");
-                datoValido2=false;
-                scaner.nextLine();
-            }
-        }
-
-        System.out.print("ciudad: ");
-        String ciudad = scanner1.nextLine();
-
-        System.out.print("estado: ");
-        String estado = scanner1.nextLine();
-
-        System.out.print("CURP: ");
-        String CURP = scanner1.nextLine();
-
-        double salario = 0;
-        boolean datoValido3 = false;
-        while(!datoValido3) {
-            try {
-                System.out.print("Salario: ");
-                salario = scanner1.nextDouble();
-                break;
-            } catch (Exception error) {
-                System.out.println("El argumento no es válido");
-                datoValido3 = false;
-                scanner1.nextLine();
-            }
-        }
-
-        System.out.print("Contraseña: ");
-        String contraseña= scanner1.nextLine();
-        if (contraseña.isEmpty()){
-            System.out.println("Ingrese de nuevo la contraseña:");
-            contraseña= scanner1.nextLine();
-        }
-
-        System.out.print("Nombre de usuario: ");
-        String nombreUsuario = scanner1.nextLine();
-
-
-        int idEmpleado = contadorIdEmpleado++;
-
-        SucursalMadero sucursalMadero = new SucursalMadero("Madero", "Av. Madero #123");
-        EjecutivoDeCuenta ejecutivoDeCuenta = new EjecutivoDeCuenta(idEmpleado, nombre, apellidos, fechaNacimiento, ciudad, estado, CURP, direccion, sucursalMadero, salario, Rol.EJECUTIVO_CUENTA, fechaIngreso, contraseña, nombreUsuario);
-        ejecutivosMadero.add(ejecutivoDeCuenta);
-
-        System.out.println("\nEmpleado registrado exitosamente!");
-
-    }
-
-    public static void mostrarEjecutivosRegistradosMadero() {
-        if (ejecutivosMadero.isEmpty()) {
-            System.out.println("No hay ejecutivos de cuenta registrados.");
-            return;
-        }
-
-        System.out.println("\n**Lista de ejecutivos de cuenta registrados:**");
-        for (EjecutivoDeCuenta ejecutivo : ejecutivosMadero) {
-            System.out.println(ejecutivo);
-        }
-    }
-    public static void modificarEjecutivosMadero(String nombreUsuario) {
-
-        EjecutivoDeCuenta empleado = null;
-
-        if (ejecutivosMadero.isEmpty()){
-            System.out.println("No hay ejecutivos de cuenta registrados en esta sucursal");
-            return;
-        }
-        for (EjecutivoDeCuenta empleadoAux : ejecutivosMadero) {
-            if (empleadoAux.getNombreUsuario().equals(nombreUsuario)) {
-                empleado = empleadoAux;
-                break;
-            }
-        }
-
-        if (empleado != null) {
-            System.out.println("Nombre: " + empleado.getNombre());
-            System.out.println("Apellidos: " + empleado.getApellidos());
-            System.out.println("Fecha de nacimiento: " + empleado.getFechaNacimiento());
-            System.out.println("Fecha de ingreso: " + empleado.getFechaInicioTrabajo());
-            System.out.println("CURP: " + empleado.getCURP());
-            System.out.println("Salario: " + empleado.getSalario());
-            System.out.println("Rol: " + empleado.getRol());
-
-            Scanner scanner2 = new Scanner(System.in);
-            System.out.println("¿Qué datos desea modificar? (Introduzca el número):");
-            System.out.println("1. Nombre");
-            System.out.println("2. Apellidos");
-            System.out.println("3. Fecha de nacimiento");
-            System.out.println("4. Fecha de ingreso");
-            System.out.println("5. CURP");
-            System.out.println("6. Salario");
-
-            int opcion = scanner2.nextInt();
-            scanner2.nextLine(); // Consumir el salto de línea
-
-            switch (opcion) {
-                case 1:
-                    System.out.print("Ingrese el nuevo nombre: ");
-                    String nuevoNombre = scanner2.nextLine();
-                    empleado.setNombre(nuevoNombre);
-                    break;
-                case 2:
-                    System.out.print("Ingrese los nuevos apellidos: ");
-                    String nuevosApellidos = scanner2.nextLine();
-                    empleado.setApellidos(nuevosApellidos);
-                    break;
-                case 3:
-                    System.out.print("Ingrese la nueva fecha de nacimiento (YYYY-MM-DD): ");
-                    String nuevaFechaNacimientoString = scanner2.nextLine();
-                    LocalDate nuevaFechaNacimiento = LocalDate.parse(nuevaFechaNacimientoString, DateTimeFormatter.ISO_DATE);
-                    empleado.setFechaNacimiento(nuevaFechaNacimiento);
-                    break;
-                case 4:
-                    System.out.print("Ingrese la nueva fecha de ingreso (YYYY-MM-DD): ");
-                    String nuevaFechaIngresoString = scanner2.nextLine();
-                    LocalDate nuevaFechaIngreso = LocalDate.parse(nuevaFechaIngresoString, DateTimeFormatter.ISO_DATE);
-                    empleado.setFechaInicioTrabajo(nuevaFechaIngreso);
-                    break;
-                case 5:
-                    System.out.print("Ingrese la nueva CURP: ");
-                    String nuevaCurp = scanner2.nextLine();
-                    empleado.setCURP(nuevaCurp);
-                    break;
-                case 6:
-                    System.out.print("Ingrese el nuevo salario: ");
-                    double nuevoSalario = scanner2.nextDouble();
-                    empleado.setSalario(nuevoSalario);
-                    break;
-            }
-
-            System.out.println("Datos del empleado modificados exitosamente!");
-        } else {
-            System.out.println("No se encontró un empleado con el nombre de usuario " + nombreUsuario);
-        }
-    }
-    public static void eliminarEjecutivoMadero(String nombreUsuario) {
-        EjecutivoDeCuenta empleado = null;
-        for (EjecutivoDeCuenta empleadoAux : ejecutivosMadero) {
-            if (empleadoAux.getNombreUsuario().equals(nombreUsuario)) {
-                empleado = empleadoAux;
-                break;
-            }
-        }
-        if (empleado != null) {
-            ejecutivosMadero.remove(empleado);
-            System.out.println("Empleado eliminado exitosamente!");
-        } else {
-            System.out.println("No se encontró un empleado con el nombre de usuario " + nombreUsuario);
-        }
-    }
-
-
-
     public static void registrarCapturistaMadero(){
 
         Scanner scanner1= new Scanner(System.in);
@@ -987,7 +733,360 @@ public class Menus {
             System.out.println("No se encontró ningún capturista con el nombre de usuario: " + nombreUsuario);
         }
     }
+    public static void eliminarCapturistaMadero(String nombreUsuario) {
+        Scanner scanner4 = new Scanner(System.in);
 
+        // Find the capturista to remove
+        Capturista capturistaAEliminar = null;
+        for (Capturista capturista : capturistasMadero) {
+            if (capturista.getNombreUsuario().equals(nombreUsuario)) {
+                capturistaAEliminar = capturista;
+                break;
+            }
+        }
+
+        if (capturistaAEliminar != null) {
+            System.out.println("\n¿Está seguro de que desea eliminar al capturista con el nombre de usuario: " + nombreUsuario + "?");
+            System.out.println("1. Sí");
+            System.out.println("2. No");
+            int opcion = scanner4.nextInt();
+            if (opcion == 1) {
+                capturistasMadero.remove(capturistaAEliminar);
+                System.out.println("\nCapturista eliminado con éxito.");
+            } else {
+                System.out.println("\nEliminación cancelada.");
+            }
+        } else {
+            System.out.println("No se encontró ningún capturista con el nombre de usuario: " + nombreUsuario);
+        }
+
+    }
+
+    public static void registrarEjecutivoDeCuentaMadero(){
+
+        Scanner scanner1= new Scanner(System.in);
+        System.out.println("\n**Registro de empleado con rol de ejecutivo de cuenta en sucursal Madero**");
+
+        System.out.print("Nombre: ");
+        String nombre = scanner1.nextLine();
+
+        System.out.print("Apellidos: ");
+        String apellidos = scanner1.nextLine();
+
+        System.out.print("Dirección: ");
+        String direccion = scanner1.nextLine();
+
+        boolean datoValido = false;
+        LocalDate fechaNacimiento= LocalDate.now();
+        while(!datoValido){
+            try {
+                System.out.print("Fecha de nacimiento (YYYY-MM-DD): ");
+                String fechaNacimientoString = scanner1.nextLine();
+                fechaNacimiento = LocalDate.parse(fechaNacimientoString, DateTimeFormatter.ISO_DATE);
+                break;
+            }
+            catch(Exception error){
+                System.out.println("Ingrese la fecha con el formato adecuado (YYYY-MM-DD)");
+                datoValido=false;
+                scaner.nextLine();
+            }
+        }
+
+        boolean datoValido2 = false;
+        LocalDate fechaIngreso= LocalDate.now();
+        while(!datoValido2){
+            try {
+                System.out.print("Fecha de ingreso (YYYY-MM-DD): ");
+                String fechaIngresoString = scanner1.nextLine();
+                fechaIngreso = LocalDate.parse(fechaIngresoString, DateTimeFormatter.ISO_DATE);
+                break;                }
+            catch(Exception error){
+                System.out.println("Ingrese la fecha con el formato adecuado (YYYY-MM-DD)");
+                datoValido2=false;
+                scaner.nextLine();
+            }
+        }
+
+        System.out.print("ciudad: ");
+        String ciudad = scanner1.nextLine();
+
+        System.out.print("estado: ");
+        String estado = scanner1.nextLine();
+
+        System.out.print("CURP: ");
+        String CURP = scanner1.nextLine();
+
+        double salario = 0;
+        boolean datoValido3 = false;
+        while(!datoValido3) {
+            try {
+                System.out.print("Salario: ");
+                salario = scanner1.nextDouble();
+                break;
+            } catch (Exception error) {
+                System.out.println("El argumento no es válido");
+                datoValido3 = false;
+                scanner1.nextLine();
+            }
+        }
+
+        System.out.print("Contraseña: ");
+        String contraseña= scanner1.nextLine();
+        if (contraseña.isEmpty()){
+            System.out.println("Ingrese de nuevo la contraseña:");
+            contraseña= scanner1.nextLine();
+        }
+
+        System.out.print("Nombre de usuario: ");
+        String nombreUsuario = scanner1.nextLine();
+
+
+        int idEmpleado = contadorIdEmpleado++;
+
+        SucursalMadero sucursalMadero = new SucursalMadero("Madero", "Av. Madero #123");
+        EjecutivoDeCuenta ejecutivoDeCuenta = new EjecutivoDeCuenta(idEmpleado, nombre, apellidos, fechaNacimiento, ciudad, estado, CURP, direccion, sucursalMadero, salario, Rol.EJECUTIVO_CUENTA, fechaIngreso, contraseña, nombreUsuario);
+        ejecutivosMadero.add(ejecutivoDeCuenta);
+
+        System.out.println("\nEmpleado registrado exitosamente!");
+
+    }
+    public static void mostrarEjecutivosRegistradosMadero() {
+        if (ejecutivosMadero.isEmpty()) {
+            System.out.println("No hay ejecutivos de cuenta registrados.");
+            return;
+        }
+
+        System.out.println("\n**Lista de ejecutivos de cuenta registrados:**");
+        for (EjecutivoDeCuenta ejecutivo : ejecutivosMadero) {
+            System.out.println(ejecutivo);
+        }
+    }
+    public static void modificarEjecutivosMadero(String nombreUsuario) {
+
+        EjecutivoDeCuenta empleado = null;
+
+        if (ejecutivosMadero.isEmpty()){
+            System.out.println("No hay ejecutivos de cuenta registrados en esta sucursal");
+            return;
+        }
+        for (EjecutivoDeCuenta empleadoAux : ejecutivosMadero) {
+            if (empleadoAux.getNombreUsuario().equals(nombreUsuario)) {
+                empleado = empleadoAux;
+                break;
+            }
+        }
+
+        if (empleado != null) {
+            System.out.println("Nombre: " + empleado.getNombre());
+            System.out.println("Apellidos: " + empleado.getApellidos());
+            System.out.println("Fecha de nacimiento: " + empleado.getFechaNacimiento());
+            System.out.println("Fecha de ingreso: " + empleado.getFechaInicioTrabajo());
+            System.out.println("CURP: " + empleado.getCURP());
+            System.out.println("Salario: " + empleado.getSalario());
+            System.out.println("Rol: " + empleado.getRol());
+
+            Scanner scanner2 = new Scanner(System.in);
+            System.out.println("¿Qué datos desea modificar? (Introduzca el número):");
+            System.out.println("1. Nombre");
+            System.out.println("2. Apellidos");
+            System.out.println("3. Fecha de nacimiento");
+            System.out.println("4. Fecha de ingreso");
+            System.out.println("5. CURP");
+            System.out.println("6. Salario");
+
+            int opcion = scanner2.nextInt();
+            scanner2.nextLine(); // Consumir el salto de línea
+
+            switch (opcion) {
+                case 1:
+                    System.out.print("Ingrese el nuevo nombre: ");
+                    String nuevoNombre = scanner2.nextLine();
+                    empleado.setNombre(nuevoNombre);
+                    break;
+                case 2:
+                    System.out.print("Ingrese los nuevos apellidos: ");
+                    String nuevosApellidos = scanner2.nextLine();
+                    empleado.setApellidos(nuevosApellidos);
+                    break;
+                case 3:
+                    System.out.print("Ingrese la nueva fecha de nacimiento (YYYY-MM-DD): ");
+                    String nuevaFechaNacimientoString = scanner2.nextLine();
+                    LocalDate nuevaFechaNacimiento = LocalDate.parse(nuevaFechaNacimientoString, DateTimeFormatter.ISO_DATE);
+                    empleado.setFechaNacimiento(nuevaFechaNacimiento);
+                    break;
+                case 4:
+                    System.out.print("Ingrese la nueva fecha de ingreso (YYYY-MM-DD): ");
+                    String nuevaFechaIngresoString = scanner2.nextLine();
+                    LocalDate nuevaFechaIngreso = LocalDate.parse(nuevaFechaIngresoString, DateTimeFormatter.ISO_DATE);
+                    empleado.setFechaInicioTrabajo(nuevaFechaIngreso);
+                    break;
+                case 5:
+                    System.out.print("Ingrese la nueva CURP: ");
+                    String nuevaCurp = scanner2.nextLine();
+                    empleado.setCURP(nuevaCurp);
+                    break;
+                case 6:
+                    System.out.print("Ingrese el nuevo salario: ");
+                    double nuevoSalario = scanner2.nextDouble();
+                    empleado.setSalario(nuevoSalario);
+                    break;
+            }
+
+            System.out.println("Datos del empleado modificados exitosamente!");
+        } else {
+            System.out.println("No se encontró un empleado con el nombre de usuario " + nombreUsuario);
+        }
+    }
+    public static void eliminarEjecutivoMadero(String nombreUsuario) {
+        EjecutivoDeCuenta empleado = null;
+        for (EjecutivoDeCuenta empleadoAux : ejecutivosMadero) {
+            if (empleadoAux.getNombreUsuario().equals(nombreUsuario)) {
+                empleado = empleadoAux;
+                break;
+            }
+        }
+        if (empleado != null) {
+            ejecutivosMadero.remove(empleado);
+            System.out.println("Empleado eliminado exitosamente!");
+        } else {
+            System.out.println("No se encontró un empleado con el nombre de usuario " + nombreUsuario);
+        }
+    }
+
+    public static void menuEjecutivoDeCuentaMadero(){
+        Scanner scan1= new Scanner(System.in);
+        System.out.print("Ingrese su nombre de usuario: ");
+        String nombreUsuario = scan1.nextLine();
+        System.out.print("Ingrese su contraseña: ");
+        String contraseña = scan1.nextLine();
+
+        boolean usuarioValido = false;
+        for (EjecutivoDeCuenta ejecutivo : ejecutivosMadero) {
+            if (ejecutivo.getNombreUsuario().equals(nombreUsuario) && ejecutivo.getContraseña().equals(contraseña)) {
+                usuarioValido = true;
+                break;
+            }
+        }
+        if (usuarioValido){
+            int opcion;
+            do{
+                System.out.println("¿Qué desea hacer? ");
+                System.out.println("1. Registrar cliente\n2. Modificar cliente"
+                        + "\n3.Eliminar cliente\n4. Mostrar clientes registrados en la sucursal Madero"
+                        + "\n5. Autorizar tarjeta de crédito\n6. Salir");
+                opcion= scan1.nextInt();
+                switch (opcion){
+                    case 1:
+                        break;
+                    case 2:
+                        scan1.nextLine();
+                        System.out.print("Ingrese el nombre de usuario del cliente que desea modificar: ");
+                        String nombreUsuario1= scan1.nextLine();
+                        break;
+                    case 3:
+                        System.out.print("Ingrese el nombre de usuario del cliente que desea eliminar: ");
+                        String nombreUsuario2= scan1.nextLine();
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                }
+            }while (opcion!=6);
+        }else {
+            System.out.println("Usuario o contraseña incorrectos.");
+        }
+    }
+
+    //ACUEDUCTO
+
+    public static void menuGerenteAcueducto(){
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Ingrese su nombre de usuario: ");
+        String nombreUsuario = scan.nextLine();
+        System.out.print("Ingrese su contraseña: ");
+        String contraseña = scan.nextLine();
+        AltaCliente s = new AltaCliente();
+
+        boolean usuarioValido = false;
+        if (gerenteAcueducto.getNombreUsuario().equals(nombreUsuario) && gerenteMadero.getContraseña().equals(contraseña)) {
+            usuarioValido = true;
+        }
+        if (usuarioValido){
+            int opcion;
+            do{
+                System.out.println("¿Qué desea hacer? ");
+                System.out.println("1. Registrar ejecutivo de cuenta\n2. Modificar ejecutivo de cuenta"
+                        + "\n3.Eliminar ejecutivo de cuenta\n4. Mostrar ejecutivos de cuenta registrados en la sucursal Madero"
+                        + "\n5. Registrar capturista\n6. Modificar capturista\n7.Eliminar capturista\n8. Registrar cliente"
+                        + "\n9.Modificar cliente\n10.Eliminar cliente\n11. Autorizar tarjeta de crédito\n"
+                        + "12. Registrar inversionista\n13. Modificar inversionista\n14. Eliminar inversionisrta\n15. Salir");
+                opcion= scan.nextInt();
+                switch (opcion){
+                    case 1:
+                        registrarEjecutivoDeCuentaAcueducto();
+                        break;
+                    case 2:
+                        scan.nextLine();
+                        System.out.print("Ingrese el nombre de usuario del ejecutivo de cuenta que desea modificar: ");
+                        String nombreUsuario1= scan.nextLine();
+                        modificarEjecutivosAcueducto(nombreUsuario1);
+                        break;
+                    case 3:
+                        System.out.print("Ingrese el nombre de usuario del ejecutivo de cuenta que desea eliminar: ");
+                        String nombreUsuario2= scan.nextLine();
+                        eliminarEjecutivoAcueducto(nombreUsuario2);
+                        break;
+                    case 4:
+                        mostrarEjecutivosRegistradosAcueducto();
+                        break;
+                    case 5:
+                        registrarCapturistaAcueducto();
+                        break;
+                    case 6:
+                        System.out.print("Ingrese el nombre de usuario del capturista que desea modificar: ");
+                        String nombreUsuario3= scan.nextLine();
+                        modificarCapturistaAcueducto(nombreUsuario3);
+                        break;
+                    case 7:
+                        System.out.print("Ingrese el nombre de usuario del capturista que desea eliminar: ");
+                        String nombreUsuario4= scan.nextLine();
+                        eliminarCapturistaAcueducto(nombreUsuario4);
+                        break;
+                    case 8: //Registrar cliente
+                        s.DarAltaCliente();
+                        break;
+                    case 9://Modificar datos del cliente
+                        s.modificarDatosCliente();
+                        break;
+
+                    case 10: //Eliminar cliente
+                        System.out.print("Ingrese el nombre de usuario del cliente que desea eliminar: ");
+                        String nombreUsuario5= scan.nextLine();
+                        s.eliminarCliente(nombreUsuario5);
+                        break;
+
+                    case 11: //Autorizar tarjeta de crédito
+
+                        break;
+                    case 12: //Registrar inversionista
+
+                        break;
+                    case 13:
+                        break;
+                    case 14:
+                        break;
+                    case 15:
+                        break;
+
+                }
+            }while (opcion!=15);
+            inicioSesion();
+        }else {
+            System.out.println("Usuario o contraseña incorrectos.");
+        }
+    }
 
     public static void menuCapturistaAcueducto(){
 
@@ -1037,6 +1136,180 @@ public class Menus {
             System.out.println("Nombre de usuaurio o contraseña inválidos");
         }
     }
+    public static void registrarCapturistaAcueducto(){
+
+        Scanner scanner1= new Scanner(System.in);
+        System.out.println("\n**Registro de empleado con rol de capturista en sucursal Acueducto**");
+
+        System.out.print("Nombre: ");
+        String nombre = scanner1.nextLine();
+
+        System.out.print("Apellidos: ");
+        String apellidos = scanner1.nextLine();
+
+        System.out.print("Dirección: ");
+        String direccion = scanner1.nextLine();
+
+        boolean datoValido = false;
+        LocalDate fechaNacimiento= LocalDate.now();
+        while(!datoValido){
+            try {
+                System.out.print("Fecha de nacimiento (YYYY-MM-DD): ");
+                String fechaNacimientoString = scanner1.nextLine();
+                fechaNacimiento = LocalDate.parse(fechaNacimientoString, DateTimeFormatter.ISO_DATE);
+                break;
+            }
+            catch(Exception error){
+                System.out.println("Ingrese la fecha con el formato adecuado (YYYY-MM-DD)");
+                datoValido=false;
+                scaner.nextLine();
+            }
+        }
+        System.out.print("ciudad: ");
+        String ciudad = scanner1.nextLine();
+
+        System.out.print("estado: ");
+        String estado = scanner1.nextLine();
+
+        boolean datoValido2 = false;
+        LocalDate fechaIngreso= LocalDate.now();
+        while(!datoValido2){
+            try {
+                System.out.print("Fecha de ingreso (YYYY-MM-DD): ");
+                String fechaIngresoString = scanner1.nextLine();
+                fechaIngreso = LocalDate.parse(fechaIngresoString, DateTimeFormatter.ISO_DATE);
+                break;                }
+            catch(Exception error){
+                System.out.println("Ingrese la fecha con el formato adecuado (YYYY-MM-DD)");
+                datoValido2=false;
+                scaner.nextLine();
+            }
+        }
+
+        System.out.print("CURP: ");
+        String CURP = scanner1.nextLine();
+
+        double salario = 0;
+        boolean datoValido3 = false;
+        while(!datoValido3) {
+            try {
+                System.out.print("Salario: ");
+                salario = scanner1.nextDouble();
+                break;
+            } catch (Exception error) {
+                System.out.println("El argumento no es válido");
+                datoValido3 = false;
+                scanner1.nextLine();
+            }
+        }
+        scanner1.nextLine();
+        System.out.print("Nombre de usuario: ");
+        String nombreUsuario = scanner1.nextLine();
+
+        System.out.print("Contraseña: ");
+        String contraseña= scanner1.nextLine();
+
+
+        int idEmpleado = contadorIdEmpleado++;
+
+        SucursalAcueducto sucursalAcueducto = new SucursalAcueducto("Acueducto", "Av. Acueducto #256");
+        Capturista capturista = new Capturista(idEmpleado, nombre, apellidos, fechaNacimiento, ciudad, estado, CURP, direccion, sucursalAcueducto, salario, Rol.CAPTURISTA, fechaIngreso, contraseña, nombreUsuario);
+        capturistasAcueducto.add(capturista);
+
+        System.out.println("\n**Empleado registrado exitosamente!");
+
+
+        System.out.println("\n**Capturistas registrados en Sucursal Acueducto:**");
+        for (Capturista empleado : capturistasAcueducto) {
+            System.out.println(empleado.toString());
+        }
+    }
+    public static void modificarCapturistaAcueducto(String nombreUsuario) {
+        Scanner scanner2 = new Scanner(System.in);
+
+        Capturista capturistaAModificar = null;
+        for (Capturista capturista : capturistasAcueducto) {
+            if (capturista.getNombreUsuario().equals(nombreUsuario)) {
+                capturistaAModificar = capturista;
+                break;
+            }
+        }
+        if (capturistaAModificar != null) {
+            System.out.println("\nInformación actual del capturista:");
+            System.out.println("  Nombre: " + capturistaAModificar.getNombre());
+            System.out.println("  Apellidos: " + capturistaAModificar.getApellidos());
+            System.out.println("  Fecha de nacimiento: " + capturistaAModificar.getFechaNacimiento());
+            System.out.println("  Fecha de ingreso: " + capturistaAModificar.getFechaInicioTrabajo());
+            System.out.println("  CURP: " + capturistaAModificar.getCURP());
+            System.out.println("  Salario: "+capturistaAModificar.getSalario());
+
+            System.out.println("¿Qué datos desea modificar? (Introduzca el número):");
+            System.out.println("1. Nombre");
+            System.out.println("2. Apellidos");
+            System.out.println("3. Fecha de nacimiento");
+            System.out.println("4. Fecha de ingreso");
+            System.out.println("5. CURP");
+            System.out.println("6. Salario");
+            System.out.println("0. Salir");
+
+            int opcion = scanner2.nextInt();
+            scanner2.nextLine(); // Consumir el salto de línea
+
+            switch (opcion) {
+                case 1:
+                    System.out.print("Ingrese el nuevo nombre: ");
+                    String nuevoNombre = scanner2.nextLine();
+                    capturistaAModificar.setNombre(nuevoNombre);
+                    break;
+                case 2:
+                    System.out.print("Ingrese los nuevos apellidos: ");
+                    String nuevosApellidos = scanner2.nextLine();
+                    capturistaAModificar.setApellidos(nuevosApellidos);
+                    break;
+                case 3:
+                    System.out.print("Ingrese la nueva fecha de nacimiento (YYYY-MM-DD): ");
+                    String nuevaFechaNacimientoString = scanner2.nextLine();
+                    LocalDate nuevaFechaNacimiento = LocalDate.parse(nuevaFechaNacimientoString, DateTimeFormatter.ISO_DATE);
+                    capturistaAModificar.setFechaNacimiento(nuevaFechaNacimiento);
+                    break;
+                case 4:
+                    System.out.print("Ingrese la nueva fecha de ingreso (YYYY-MM-DD): ");
+                    String nuevaFechaIngresoString = scanner2.nextLine();
+                    LocalDate nuevaFechaIngreso = LocalDate.parse(nuevaFechaIngresoString, DateTimeFormatter.ISO_DATE);
+                    capturistaAModificar.setFechaInicioTrabajo(nuevaFechaIngreso);
+                    break;
+                case 5:
+                    System.out.print("Ingrese la nueva CURP: ");
+                    String nuevaCurp = scanner2.nextLine();
+                    capturistaAModificar.setCURP(nuevaCurp);
+                    break;
+                case 6:
+                    boolean datoValido = false;
+                    double nuevoSalario = 0;
+                    while (!datoValido) {
+                        try {
+                            System.out.print("Ingrese el nuevo salario: ");
+                            nuevoSalario = scaner.nextDouble();
+                            datoValido = true;
+                        } catch (Exception error) {
+                            System.out.println("El argumento no es válido");
+                            datoValido = false;
+                            scaner.nextLine();
+                        }
+                    }
+                    capturistaAModificar.setSalario(nuevoSalario);
+                    scanner2.nextLine();
+                    break;
+                case 0:
+                    break;
+            }
+
+            System.out.println("\nInformación del capturista modificada con éxito.");
+        } else {
+            System.out.println("No se encontró ningún capturista con el nombre de usuario: " + nombreUsuario);
+        }
+    }
+
     public static void registrarEjecutivoDeCuentaAcueducto(){
 
         Scanner scanner1= new Scanner(System.in);
@@ -1133,96 +1406,6 @@ public class Menus {
             System.out.println(ejecutivo);
         }
     }
-
-
-    public static void registrarCapturistaAcueducto(){
-
-        Scanner scanner1= new Scanner(System.in);
-        System.out.println("\n**Registro de empleado con rol de capturista en sucursal Acueducto**");
-
-        System.out.print("Nombre: ");
-        String nombre = scanner1.nextLine();
-
-        System.out.print("Apellidos: ");
-        String apellidos = scanner1.nextLine();
-
-        System.out.print("Dirección: ");
-        String direccion = scanner1.nextLine();
-
-        boolean datoValido = false;
-        LocalDate fechaNacimiento= LocalDate.now();
-        while(!datoValido){
-            try {
-                System.out.print("Fecha de nacimiento (YYYY-MM-DD): ");
-                String fechaNacimientoString = scanner1.nextLine();
-                fechaNacimiento = LocalDate.parse(fechaNacimientoString, DateTimeFormatter.ISO_DATE);
-                break;
-            }
-            catch(Exception error){
-                System.out.println("Ingrese la fecha con el formato adecuado (YYYY-MM-DD)");
-                datoValido=false;
-                scaner.nextLine();
-            }
-        }
-        System.out.print("ciudad: ");
-        String ciudad = scanner1.nextLine();
-
-        System.out.print("estado: ");
-        String estado = scanner1.nextLine();
-
-        boolean datoValido2 = false;
-        LocalDate fechaIngreso= LocalDate.now();
-        while(!datoValido2){
-            try {
-                System.out.print("Fecha de ingreso (YYYY-MM-DD): ");
-                String fechaIngresoString = scanner1.nextLine();
-                fechaIngreso = LocalDate.parse(fechaIngresoString, DateTimeFormatter.ISO_DATE);
-                break;                }
-            catch(Exception error){
-                System.out.println("Ingrese la fecha con el formato adecuado (YYYY-MM-DD)");
-                datoValido2=false;
-                scaner.nextLine();
-            }
-        }
-
-        System.out.print("CURP: ");
-        String CURP = scanner1.nextLine();
-
-        double salario = 0;
-        boolean datoValido3 = false;
-        while(!datoValido3) {
-            try {
-                System.out.print("Salario: ");
-                salario = scanner1.nextDouble();
-                break;
-            } catch (Exception error) {
-                System.out.println("El argumento no es válido");
-                datoValido3 = false;
-                scanner1.nextLine();
-            }
-        }
-        scanner1.nextLine();
-        System.out.print("Nombre de usuario: ");
-        String nombreUsuario = scanner1.nextLine();
-
-        System.out.print("Contraseña: ");
-        String contraseña= scanner1.nextLine();
-
-
-        int idEmpleado = contadorIdEmpleado++;
-
-        SucursalAcueducto sucursalAcueducto = new SucursalAcueducto("Acueducto", "Av. Acueducto #256");
-        Capturista capturista = new Capturista(idEmpleado, nombre, apellidos, fechaNacimiento, ciudad, estado, CURP, direccion, sucursalAcueducto, salario, Rol.CAPTURISTA, fechaIngreso, contraseña, nombreUsuario);
-        capturistasAcueducto.add(capturista);
-
-        System.out.println("\n**Empleado registrado exitosamente!");
-
-
-        System.out.println("\n**Capturistas registrados en Sucursal Acueducto:**");
-        for (Capturista empleado : capturistasAcueducto) {
-            System.out.println(empleado.toString());
-        }
-    }
     public static void modificarEjecutivosAcueducto(String nombreUsuario) {
 
         EjecutivoDeCuenta empleado = null;
@@ -1300,7 +1483,6 @@ public class Menus {
             }
         }
     }
-
     public static void eliminarEjecutivoAcueducto(String nombreUsuario) {
         EjecutivoDeCuenta empleado = null;
         for (EjecutivoDeCuenta empleadoAux : ejecutivosAcueducto) {
@@ -1314,120 +1496,6 @@ public class Menus {
             System.out.println("Empleado eliminado exitosamente!");
         } else {
             System.out.println("No se encontró un empleado con el nombre de usuario " + nombreUsuario);
-        }
-    }
-
-    public static void eliminarCapturistaMadero(String nombreUsuario) {
-        Scanner scanner4 = new Scanner(System.in);
-
-        // Find the capturista to remove
-        Capturista capturistaAEliminar = null;
-        for (Capturista capturista : capturistasMadero) {
-            if (capturista.getNombreUsuario().equals(nombreUsuario)) {
-                capturistaAEliminar = capturista;
-                break;
-            }
-        }
-
-        if (capturistaAEliminar != null) {
-            System.out.println("\n¿Está seguro de que desea eliminar al capturista con el nombre de usuario: " + nombreUsuario + "?");
-            System.out.println("1. Sí");
-            System.out.println("2. No");
-            int opcion = scanner4.nextInt();
-            if (opcion == 1) {
-                capturistasMadero.remove(capturistaAEliminar);
-                System.out.println("\nCapturista eliminado con éxito.");
-            } else {
-                System.out.println("\nEliminación cancelada.");
-            }
-        } else {
-            System.out.println("No se encontró ningún capturista con el nombre de usuario: " + nombreUsuario);
-        }
-
-    }
-    public static void modificarCapturistaAcueducto(String nombreUsuario) {
-        Scanner scanner2 = new Scanner(System.in);
-
-        Capturista capturistaAModificar = null;
-        for (Capturista capturista : capturistasAcueducto) {
-            if (capturista.getNombreUsuario().equals(nombreUsuario)) {
-                capturistaAModificar = capturista;
-                break;
-            }
-        }
-        if (capturistaAModificar != null) {
-            System.out.println("\nInformación actual del capturista:");
-            System.out.println("  Nombre: " + capturistaAModificar.getNombre());
-            System.out.println("  Apellidos: " + capturistaAModificar.getApellidos());
-            System.out.println("  Fecha de nacimiento: " + capturistaAModificar.getFechaNacimiento());
-            System.out.println("  Fecha de ingreso: " + capturistaAModificar.getFechaInicioTrabajo());
-            System.out.println("  CURP: " + capturistaAModificar.getCURP());
-            System.out.println("  Salario: "+capturistaAModificar.getSalario());
-
-            System.out.println("¿Qué datos desea modificar? (Introduzca el número):");
-            System.out.println("1. Nombre");
-            System.out.println("2. Apellidos");
-            System.out.println("3. Fecha de nacimiento");
-            System.out.println("4. Fecha de ingreso");
-            System.out.println("5. CURP");
-            System.out.println("6. Salario");
-            System.out.println("0. Salir");
-
-            int opcion = scanner2.nextInt();
-            scanner2.nextLine(); // Consumir el salto de línea
-
-            switch (opcion) {
-                case 1:
-                    System.out.print("Ingrese el nuevo nombre: ");
-                    String nuevoNombre = scanner2.nextLine();
-                    capturistaAModificar.setNombre(nuevoNombre);
-                    break;
-                case 2:
-                    System.out.print("Ingrese los nuevos apellidos: ");
-                    String nuevosApellidos = scanner2.nextLine();
-                    capturistaAModificar.setApellidos(nuevosApellidos);
-                    break;
-                case 3:
-                    System.out.print("Ingrese la nueva fecha de nacimiento (YYYY-MM-DD): ");
-                    String nuevaFechaNacimientoString = scanner2.nextLine();
-                    LocalDate nuevaFechaNacimiento = LocalDate.parse(nuevaFechaNacimientoString, DateTimeFormatter.ISO_DATE);
-                    capturistaAModificar.setFechaNacimiento(nuevaFechaNacimiento);
-                    break;
-                case 4:
-                    System.out.print("Ingrese la nueva fecha de ingreso (YYYY-MM-DD): ");
-                    String nuevaFechaIngresoString = scanner2.nextLine();
-                    LocalDate nuevaFechaIngreso = LocalDate.parse(nuevaFechaIngresoString, DateTimeFormatter.ISO_DATE);
-                    capturistaAModificar.setFechaInicioTrabajo(nuevaFechaIngreso);
-                    break;
-                case 5:
-                    System.out.print("Ingrese la nueva CURP: ");
-                    String nuevaCurp = scanner2.nextLine();
-                    capturistaAModificar.setCURP(nuevaCurp);
-                    break;
-                case 6:
-                    boolean datoValido = false;
-                    double nuevoSalario = 0;
-                    while (!datoValido) {
-                        try {
-                            System.out.print("Ingrese el nuevo salario: ");
-                            nuevoSalario = scaner.nextDouble();
-                            datoValido = true;
-                        } catch (Exception error) {
-                            System.out.println("El argumento no es válido");
-                            datoValido = false;
-                            scaner.nextLine();
-                        }
-                    }
-                    capturistaAModificar.setSalario(nuevoSalario);
-                    scanner2.nextLine();
-                    break;
-                case 0:
-                    break;
-            }
-
-            System.out.println("\nInformación del capturista modificada con éxito.");
-        } else {
-            System.out.println("No se encontró ningún capturista con el nombre de usuario: " + nombreUsuario);
         }
     }
     public static void eliminarCapturistaAcueducto(String nombreUsuario) {
@@ -1457,53 +1525,8 @@ public class Menus {
         }
 
     }
-    public static void menuEjecutivoDeCuentaMadero(){
-        Scanner scan1= new Scanner(System.in);
-        System.out.print("Ingrese su nombre de usuario: ");
-        String nombreUsuario = scan1.nextLine();
-        System.out.print("Ingrese su contraseña: ");
-        String contraseña = scan1.nextLine();
 
-        boolean usuarioValido = false;
-        for (EjecutivoDeCuenta ejecutivo : ejecutivosMadero) {
-            if (ejecutivo.getNombreUsuario().equals(nombreUsuario) && ejecutivo.getContraseña().equals(contraseña)) {
-                usuarioValido = true;
-                break;
-            }
-        }
-        if (usuarioValido){
-            int opcion;
-            do{
-                System.out.println("¿Qué desea hacer? ");
-                System.out.println("1. Registrar cliente\n2. Modificar cliente"
-                        + "\n3.Eliminar cliente\n4. Mostrar clientes registrados en la sucursal Madero"
-                        + "\n5. Autorizar tarjeta de crédito\n6. Salir");
-                opcion= scan1.nextInt();
-                switch (opcion){
-                    case 1:
-                        break;
-                    case 2:
-                        scan1.nextLine();
-                        System.out.print("Ingrese el nombre de usuario del cliente que desea modificar: ");
-                        String nombreUsuario1= scan1.nextLine();
-                        break;
-                    case 3:
-                        System.out.print("Ingrese el nombre de usuario del cliente que desea eliminar: ");
-                        String nombreUsuario2= scan1.nextLine();
-                    case 4:
-                        break;
-                    case 5:
-                        break;
-                    case 6:
-                        break;
-                }
-            }while (opcion!=6);
-        }else {
-            System.out.println("Usuario o contraseña incorrectos.");
-        }
-    }
-
-    public static void menuEjecutivoDeCuentaAcueducto() {
+    public static void menuEjecutivoDeCuentaAcueducto(){
         AltaCliente s= new AltaCliente();
         Scanner scan2 = new Scanner(System.in);
         System.out.print("Ingrese su nombre de usuario: ");
@@ -1540,6 +1563,7 @@ public class Menus {
                         s.eliminarCliente((nombreUsuario2));
                     case 4:
                         break;
+
                     case 5:
                         break;
                     case 6:
@@ -1551,4 +1575,4 @@ public class Menus {
         }
 
     }
-    }
+}
