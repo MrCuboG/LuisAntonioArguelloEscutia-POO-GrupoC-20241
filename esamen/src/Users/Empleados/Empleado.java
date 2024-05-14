@@ -174,22 +174,52 @@ public class Empleado{
 
         return homonimo.toUpperCase() +primeraLetraApellidoMaterno.toUpperCase()+nombre.toUpperCase()+ fechaNacimientoStr ;
     }
+    public String generarCurp(){
+        String homonimo = apellidos.substring(0, 1);
+        String primeraLetraApellidoMaterno = buscarPrimeraVocal(apellidos.split(" ")[1]);
+        String nombrePrimeraLetra = nombre.substring(0, 1);
+
+        String fechaNacimientoStr="";
+        try {
+            fechaNacimientoStr = fechaNacimiento.format(DateTimeFormatter.ofPattern("yyMMdd"));
+        } catch (NullPointerException e) {
+            System.err.println("Error al formatear la fecha de nacimiento: " + e.getMessage());
+            return null;
+        }
+    }
+
+    private String buscarPrimeraVocal (String cadena) {
+        String vowels = "AEIOUaeiou";
+        for (int i = 0; i < cadena.length(); i++) {
+            if (vowels.contains(String.valueOf(cadena.charAt(i)))) {
+                return String.valueOf(cadena.charAt(i));
+            }
+        }
+        return "";
+    }
+
+    private String obtenerCodigoDeEntidadFederativa(){
+        if (estado)
+    }
+
+
+
 
     @Override
     public String toString() {
         return "Empleado{" +
-                "idEmpleado=" + idEmpleado +
-                ", nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento +
-                ", rfc='" + rfc + '\'' + // Línea para imprimir el RFC
-                ", curp='" + CURP + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", sucursal=" + sucursal +
-                ", salario=" + salario +
-                ", rol=" + rol +
-                ", fechaInicioTrabajo=" + fechaInicioTrabajo +
-                '}';
+                "\nIdEmpleado: " + idEmpleado +
+                "\nNombre: " + nombre +
+                "\nApellidos: " + apellidos +
+                "\nFechaNacimiento: " + fechaNacimiento +
+                "\nRfc: " + rfc + // Línea para imprimir el RFC
+                "\nCurp: " + CURP +
+                "\nDireccion: " + direccion+
+                "\nSucursal: " + sucursal +
+                "\nSalario=" + salario +
+                "\nRol=" + rol +
+                "\nFechaInicioTrabajo=" + fechaInicioTrabajo +
+                "\n"+'}';
     }
 
 }

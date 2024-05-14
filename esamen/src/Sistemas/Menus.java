@@ -290,6 +290,8 @@ public class Menus {
         System.out.println("\nSesión cerrada");
     }
 
+    
+
     public void clienteTarjetas(){
         if (tarjetaDebito != null) {
             System.out.println("--------- TARJETA DE DEBITO ---------");
@@ -396,8 +398,7 @@ public class Menus {
                     opcionMenu= scaner.nextInt();
                     switch(opcionMenu){
                         case 1://Menú gernete
-                            System.out.println(gerenteMadero.toString());
-                            menuGerenteMadero();
+                                menuGerenteMadero();
                             break;
                         case 2: //menu capturistas
                             if (capturistasMadero.isEmpty()) {
@@ -420,7 +421,6 @@ public class Menus {
                     opcionMenu= scaner.nextInt();
                     switch(opcionMenu){
                         case 1:
-                            System.out.println(gerenteAcueducto.toString());
                             menuGerenteAcueducto();
                             break;
                         case 2:

@@ -1,4 +1,7 @@
 package Users;
+import Sucursales.SucursalMadero;
+import Users.utils.constantes.Rol;
+
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -67,9 +70,10 @@ public class AltaCliente {
         String cadena = curp;
         String rfc1 = cadena.substring(0, 10);
         String rfc = rfc1 + homoclave;
-        Cliente cliente = new Cliente(nombre, apellidos, añoNacimiento, ciudad, estado, curp, rfc,
-                fechaRegistroStr, usuario, contraseña, sucursalRegistro, direccion);
-        clientes.add(cliente);
+        Cliente cliente = new Cliente(123, nombre, apellidos, direccion, añoNacimiento, rfc, curp, usuario, contraseña, fechaRegistroStr);
+        //Cliente cliente = new Cliente(nombre, apellidos, añoNacimiento, ciudad, estado, curp, rfc,
+        //        fechaRegistroStr, usuario, contraseña, sucursalRegistro, direccion);
+        SucursalMadero.getClientes().add(cliente);
 
         // Imprimir información del cliente
         System.out.println("\n** Datos del cliente **");
@@ -77,8 +81,6 @@ public class AltaCliente {
         System.out.println(cliente.toString());
 
         System.out.println("\n** Cliente dado de alta con éxito! **");
-
-        sc.close();
     }
 
 
@@ -133,7 +135,7 @@ public class AltaCliente {
                 case 2:
                     System.out.print("Ingrese los nuevos apellidos: ");
                     String nuevosApellidos = sc.nextLine();
-                    clienteAModificar.setApellidos(nuevosApellidos);
+                    clienteAModificar.setApellido(nuevosApellidos);
                     break;
                 case 3:
                     System.out.print("Ingrese la nueva ciudad: ");
@@ -153,7 +155,7 @@ public class AltaCliente {
                 case 6:
                     System.out.print("Ingrese la nueva contraseña: ");
                     String nuevaContrasena = sc.nextLine();
-                    clienteAModificar.setContraseña(nuevaContrasena);
+                    clienteAModificar.setPassword(nuevaContrasena);
                     break;
                 case 7:
                     break;
@@ -174,7 +176,7 @@ public class AltaCliente {
 
         Cliente clienteAEliminar = null;
         for (Cliente cliente : clientes) {
-            if (cliente.getUsuario().equals(nombreUsuario)) {
+            if (cliente.getUser().equals(nombreUsuario)) {
                 clienteAEliminar = cliente;
                 break;
             }

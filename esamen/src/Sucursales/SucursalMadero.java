@@ -1,5 +1,6 @@
 package Sucursales;
 
+import Users.Cliente;
 import Users.Empleados.Empleado;
 import Users.Inversionista;
 import Users.Usuario;
@@ -12,6 +13,7 @@ public class SucursalMadero extends Sucursal{
 
     private static int contadorIdEmpleado = 1;
     int idGerente = 1;
+    static ArrayList<Cliente> clientes = new ArrayList<>();
     static HashMap<Rol, ArrayList<Empleado>> empleados = new HashMap<>();
     static HashMap<Rol, ArrayList<Inversionista>> inversionistas = new HashMap<>();
 
@@ -68,6 +70,9 @@ public class SucursalMadero extends Sucursal{
 
     public static void setHistorialInversiones(String registro) {
         historialInversiones.add(registro);
+    }
+    public static ArrayList<Cliente> getClientes() {
+        return clientes;
     }
 
     public void modificarDatosInversionista() {

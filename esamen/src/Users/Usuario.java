@@ -21,6 +21,10 @@ public class Usuario {
         this.rol = rol;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public String getUser() {
         return user;
     }
@@ -55,5 +59,45 @@ public class Usuario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public String getNacimiento() {
+        return nacimiento;
+    }
+
+    public String getRfc() {
+        return rfc;
+    }
+
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
+    }
+
+    public String getCurp() {
+        return curp;
+    }
+
+    public void setCurp(String curp) {
+        this.curp = curp;
     }
 }
