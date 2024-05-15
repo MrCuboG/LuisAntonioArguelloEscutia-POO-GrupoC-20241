@@ -15,7 +15,7 @@ public class SucursalMadero extends Sucursal{
     int idGerente = 1;
     static ArrayList<Cliente> clientes = new ArrayList<>();
     static HashMap<Rol, ArrayList<Empleado>> empleados = new HashMap<>();
-    static HashMap<Rol, ArrayList<Inversionista>> inversionistas = new HashMap<>();
+    static ArrayList<Inversionista> inversionistas = new ArrayList<>();
 
     GerenteSucursal gerenteMadero = new GerenteSucursal(idGerente,"Diana", "Campos Rosas", LocalDate. of(2005, 10, 24),"Morelia","Michoacán",
             "CARD051024MMNMSNA5","Calle Morelos #456", this, 50000.00,Rol.GERENTE_SUCURSAL,LocalDate.of(2020, 01, 01), "a", "d");
@@ -61,6 +61,7 @@ public class SucursalMadero extends Sucursal{
         return empleados;
     }
 
+
     //    public static final HashMap<Rol, Usuario> usuarios = new HashMap<>();
 //    public SucursalMadero(String direccionSucursal, Gerente gerente) {
 //        super(direccionSucursal, gerente);
@@ -74,15 +75,18 @@ public class SucursalMadero extends Sucursal{
     public static ArrayList<Cliente> getClientes() {
         return clientes;
     }
+    public static ArrayList<Inversionista> getInversionistas() {
+        return inversionistas;
+    }
 
-    public void modificarDatosInversionista() {
+    public static void modificarDatosInversionista() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Ingrese el usuario del inversionista a modificar: ");
         String usuarioABuscar = scanner.nextLine();
 
         Usuario inversionistaAModificar = null;
-        for (Usuario usuario : inversionistas.get(Rol.INVERSIONISTA)){
+        for (Usuario usuario : inversionistas){
             if (usuario.getUser().equals(usuarioABuscar)) {
                 inversionistaAModificar = usuario;
             }

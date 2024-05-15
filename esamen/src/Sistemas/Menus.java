@@ -1,6 +1,6 @@
 package Sistemas;
 
-import java.util.Scanner;
+import java.util.*;
 
 
 //IGNOREN ESTA CLASE ES INUTIL POR EL MOMENTO
@@ -12,24 +12,32 @@ import java.util.Scanner;
 //IGNOREN ESTA CLASE ES INUTIL POR EL MOMENTO
 //IGNOREN ESTA CLASE ES INUTIL POR EL MOMENTO
 import Users.*;
+import Users.utils.UsuarioUtils;
+import tarjetas.EstadoSolicitud;
+import tarjetas.SolicitudTarjeta;
 import tarjetas.TarjetasDebito;
+import tarjetas.TarjetaSimplicity;
+import tarjetas.TarjetaPlatino;
+import tarjetas.TarjetaOro;
 import utils.UsuarioEnSesion;
 import Users.Empleados.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import Users.Empleados.GerenteSucursal;
 import java.time.*;
 import  Sucursales.*;
 import  Users.utils.constantes.Rol;
 import java.time.format.DateTimeFormatter;
+import Users.Inversionista;
 
 public class Menus {
     TarjetasDebito tarjetaDebito = null;
+    TarjetaSimplicity tarjetaSimplicity = null;
+    TarjetaPlatino tarjetaPlatino = null;
+    TarjetaOro tarjetaOro = null;
     Scanner scanner = new Scanner(System.in);
     static Empleado usuarioActual;
     String salir = "6";
     static int sucur;
+
 
     public static void inicioSesion() {
         Scanner scanner = new Scanner(System.in);
@@ -194,39 +202,70 @@ public class Menus {
                     if (tarjetaDebito != null) {
                         System.out.println("--------- TARJETA DE DEBITO ---------");
                         System.out.println(tarjetaDebito.toString());
-                    } else {
-                        System.out.println("No se ha creado ninguna tarjeta de débito.");
                     }
-                    break;
                 case 2:
                     if (tarjetaDebito != null) {
                         System.out.println("1. Agregar dinero");
                         System.out.println("2. Retirar dinero");
                         String opcionDinero = scanner.nextLine();
+                        String tarjeta;
 
                         switch (opcionDinero) {
                             case "1":
-                                System.out.println("Ingrese la cantidad a agregar:");
-                                double cantidadAgregar = scanner.nextDouble();
-                                tarjetaDebito.agregarDinero(cantidadAgregar);
-                                System.out.println("Se agregaron " + cantidadAgregar + " a la tarjeta");
-                                break;
-                            case "2":
-                                System.out.println("Ingrese la cantidad a retirar:");
-                                double cantidadRetirar = scanner.nextDouble();
-                                boolean retirado = tarjetaDebito.retirarDinero(cantidadRetirar);
-                                if (retirado) {
-                                    System.out.println("Se retiraron " + cantidadRetirar + " de la tarjeta");
+                                System.out.println("Ingrese la Tarjeta a la que Desea Agregarle Dinero");
+                                System.out.println("1. Debito 2. Simplicity 3. Platino 4. Oro");
+                                tarjeta = scanner.nextLine();
+                                switch (tarjeta) {
+                                    case "1":
+                                        System.out.println("Ingrese la cantidad a agregar:");
+                                        double cantidadAgregar = scanner.nextDouble();
+                                        tarjetaDebito.agregarDinero(cantidadAgregar);
+                                        break;
+                                    case "2":
+                                        System.out.println("Ingrese la cantidad a agregar:");
+                                        double cantidadAgregarS = scanner.nextDouble();
+                                        tarjetaSimplicity.agregarDinero(cantidadAgregarS);
+                                        break;
+                                    case "3":
+                                        System.out.println("Ingrese la cantidad a agregar:");
+                                        double cantidadAgregarP = scanner.nextDouble();
+                                        tarjetaPlatino.agregarDinero(cantidadAgregarP);
+                                        break;
+                                    case "4":
+                                        System.out.println("Ingrese la cantidad a agregar:");
+                                        double cantidadAgregarO = scanner.nextDouble();
+                                        tarjetaOro.agregarDinero(cantidadAgregarO);
+                                        break;
                                 }
-                                break;
-                            default:
-                                System.out.println("Opción no válida");
-                                break;
+
+                            case "2":
+                                System.out.println("Ingrese la Tarjeta a la que Desea Retirarle Dinero");
+                                System.out.println("1. Debito 2. Simplicity 3. Platino 4. Oro");
+                                tarjeta = scanner.nextLine();
+                                switch (tarjeta) {
+                                    case "1":
+                                        System.out.println("Ingrese la cantidad a Retirar:");
+                                        double cantidadRetirar = scanner.nextDouble();
+                                        tarjetaDebito.agregarDinero(cantidadRetirar);
+                                        break;
+                                    case "2":
+                                        System.out.println("Ingrese la cantidad a Retirar:");
+                                        double cantidadRetirarS = scanner.nextDouble();
+                                        tarjetaSimplicity.agregarDinero(cantidadRetirarS);
+                                        break;
+                                    case "3":
+                                        System.out.println("Ingrese la cantidad a Retirar:");
+                                        double cantidadRetirarP = scanner.nextDouble();
+                                        tarjetaPlatino.agregarDinero(cantidadRetirarP);
+                                        break;
+                                    case "4":
+                                        System.out.println("Ingrese la cantidad a Retirar:");
+                                        double cantidadRetirarO = scanner.nextDouble();
+                                        tarjetaOro.agregarDinero(cantidadRetirarO);
+                                        break;
+                                }
                         }
-                    } else {
-                        System.out.println("No se ha creado ninguna tarjeta de débito");
                     }
-                    break;
                 case 3:
                     if (tarjetaDebito.getCantidad() >= 50000 || tarjetaDebito.getCantidad() >= 100000 || tarjetaDebito.getCantidad() >= 200000) {
                         if (tarjetaDebito.getCantidad() <= 100000) {
@@ -235,8 +274,6 @@ public class Menus {
                             String opcionSolicitar = scanner.nextLine();
                             switch (opcionSolicitar) {
                                 case "1":
-
-
                                     break;
                                 case "2":
                                     break;
@@ -290,7 +327,7 @@ public class Menus {
         System.out.println("\nSesión cerrada");
     }
 
-    
+
 
     public void clienteTarjetas(){
         if (tarjetaDebito != null) {
@@ -334,7 +371,7 @@ public class Menus {
         String contraseñaGerenteMadero = "gerente madero";
         String nombreUsuarioGerenteMadero = "diana_campos";
 
-        gerenteMadero = new GerenteSucursal(idGerenteMadero,nombreGerenteMadero, apellidosGerenteMadero, fechaNacimientoGerenteMadero, ciudadGerenteMadero,estadoGerenteMadero, curpGerenteMadero, direccionGerenteMadero, sucursalGerenteMadero,
+        gerenteMadero = new GerenteSucursal(idGerenteMadero,nombreGerenteMadero, apellidosGerenteMadero, fechaNacimientoGerenteMadero, ciudadGerenteMadero,estadoGerenteMadero,curpGerenteMadero, direccionGerenteMadero, sucursalGerenteMadero,
                 salarioGerenteMadero, rolGerenteMadero, fechaInicioTrabajoGerenteMadero, contraseñaGerenteMadero, nombreUsuarioGerenteMadero);
 
         SucursalMadero sucursalMadero = new SucursalMadero("Madero", "Av. Madero #123", gerenteMadero);
@@ -442,16 +479,20 @@ public class Menus {
         leer1.close();
     }
     public static void menuGerenteMadero(){
-            Scanner scan = new Scanner(System.in);
+        List<Cliente> clientes;
+        Scanner scan = new Scanner(System.in);
             AltaCliente s = new AltaCliente();
+            List <Inversionista> inversionistas= SucursalMadero.getInversionistas();
+            SolicitudTarjeta solicitudTarjeta = new SolicitudTarjeta();
             int opcion;
                 do{
                     System.out.println("¿Qué desea hacer? ");
                     System.out.println("1. Registrar ejecutivo de cuenta\n2. Modificar ejecutivo de cuenta"
                             + "\n3.Eliminar ejecutivo de cuenta\n4. Mostrar ejecutivos de cuenta registrados en la sucursal Madero"
-                            + "\n5. Registrar capturista\n6. Modificar capturista\n7.Eliminar capturista\n8. Registrar cliente"
-                            + "\n9.Modificar cliente\n10.Eliminar cliente\n11. Autorizar tarjeta de crédito\n"
-                            + "12. Registrar inversionista\n13. Modificar inversionista\n14. Eliminar inversionisrta\n15. Salir");
+                            + "\n5. Registrar capturista\n6. Modificar capturista\n7.Eliminar capturista\n8.Mostrar capturistas registrados\n9. Registrar cliente"
+                            + "\n10.Modificar cliente\n11.Eliminar cliente\n12. Mostrar clientes registrados" +
+                            "\n13. Autorizar tarjeta de crédito\n14. Registrar inversionista\n15. Modificar inversionista" +
+                            "\n16. Eliminar inversionista\n17. Salir");
                     opcion= scan.nextInt();
                     switch (opcion){
                         case 1:
@@ -484,33 +525,41 @@ public class Menus {
                             String nombreUsuario4= scan.nextLine();
                             eliminarCapturistaMadero(nombreUsuario4);
                             break;
-                        case 8: //Registrar cliente
+                        case 8: //Mostrrar capturistas
+                            mostrarCapturistasMadero();
+                            break;
+                        case 9: //Registrar cliente
                             s.DarAltaCliente();
                             break;
-                        case 9://Modificar datos del cliente
+                        case 10://Modificar datos del cliente
                             s.modificarDatosCliente();
                             break;
 
-                        case 10: //Eliminar cliente
+                        case 11: //Eliminar cliente
                             System.out.print("Ingrese el nombre de usuario del cliente que desea eliminar: ");
                             String nombreUsuario5= scan.nextLine();
                             s.eliminarCliente(nombreUsuario5);
                             break;
-
-                        case 11: //Autorizar tarjeta de crédito
-
+                        case 12: //Mostrar cliente
+                            s.mostrarLista();
                             break;
-                        case 12: //Registrar inversionista
+                        case 13: //Autorizar tarjeta de crédito
+                            s.autorizarSolicitudTarjeta(scan);
                             break;
-                        case 13: //Modificar inversionista
+                        case 14: //Registrar inversionista
+                            registarInversionistaMadero();
                             break;
-                        case 14: // Eliminar inversionista
+                        case 15: //Modificar inversionista
+                            modificarInversionistaMadero();
                             break;
-                        case 15:
+                        case 16: // Eliminar inversionista
+                            eliminarInversionista();
+                            break;
+                        case 17:
                             break;
 
                     }
-                }while (opcion!=15);
+                }while (opcion!=17);
                 inicioSesion();
         }
 
@@ -616,9 +665,6 @@ public class Menus {
         System.out.print("estado: ");
         String estado = scanner1.nextLine();
 
-        System.out.print("CURP: ");
-        String CURP = scanner1.nextLine();
-
         double salario = 0;
         boolean datoValido3 = false;
         while(!datoValido3) {
@@ -642,7 +688,7 @@ public class Menus {
         int idEmpleado = contadorIdEmpleado++;
 
         SucursalMadero sucursalMadero = new SucursalMadero("Madero", "Av. Madero #123");
-        Capturista capturista = new Capturista(idEmpleado, nombre, apellidos, fechaNacimiento, ciudad, estado, CURP, direccion, sucursalMadero, salario, Rol.CAPTURISTA, fechaIngreso, contraseña, nombreUsuario);
+        Capturista capturista = new Capturista(idEmpleado, nombre, apellidos, fechaNacimiento, ciudad, estado, direccion, sucursalMadero, salario, Rol.CAPTURISTA, fechaIngreso, contraseña, nombreUsuario);
         capturistasMadero.add(capturista);
 
         System.out.println("\nEmpleado registrado exitosamente!");
@@ -664,7 +710,6 @@ public class Menus {
             System.out.println("  Apellidos: " + capturistaAModificar.getApellidos());
             System.out.println("  Fecha de nacimiento: " + capturistaAModificar.getFechaNacimiento());
             System.out.println("  Fecha de ingreso: " + capturistaAModificar.getFechaInicioTrabajo());
-            System.out.println("  CURP: " + capturistaAModificar.getCURP());
             System.out.println("  Salario: "+capturistaAModificar.getSalario());
 
             System.out.println("¿Qué datos desea modificar? (Introduzca el número):");
@@ -672,8 +717,7 @@ public class Menus {
             System.out.println("2. Apellidos");
             System.out.println("3. Fecha de nacimiento");
             System.out.println("4. Fecha de ingreso");
-            System.out.println("5. CURP");
-            System.out.println("6. Salario");
+            System.out.println("5. Salario");
             System.out.println("0. Salir");
 
             int opcion = scanner2.nextInt();
@@ -702,12 +746,8 @@ public class Menus {
                     LocalDate nuevaFechaIngreso = LocalDate.parse(nuevaFechaIngresoString, DateTimeFormatter.ISO_DATE);
                     capturistaAModificar.setFechaInicioTrabajo(nuevaFechaIngreso);
                     break;
+
                 case 5:
-                    System.out.print("Ingrese la nueva CURP: ");
-                    String nuevaCurp = scanner2.nextLine();
-                    capturistaAModificar.setCURP(nuevaCurp);
-                    break;
-                case 6:
                     boolean datoValido = false;
                     double nuevoSalario = 0;
                     while (!datoValido) {
@@ -813,9 +853,6 @@ public class Menus {
         System.out.print("estado: ");
         String estado = scanner1.nextLine();
 
-        System.out.print("CURP: ");
-        String CURP = scanner1.nextLine();
-
         double salario = 0;
         boolean datoValido3 = false;
         while(!datoValido3) {
@@ -844,7 +881,7 @@ public class Menus {
         int idEmpleado = contadorIdEmpleado++;
 
         SucursalMadero sucursalMadero = new SucursalMadero("Madero", "Av. Madero #123");
-        EjecutivoDeCuenta ejecutivoDeCuenta = new EjecutivoDeCuenta(idEmpleado, nombre, apellidos, fechaNacimiento, ciudad, estado, CURP, direccion, sucursalMadero, salario, Rol.EJECUTIVO_CUENTA, fechaIngreso, contraseña, nombreUsuario);
+        EjecutivoDeCuenta ejecutivoDeCuenta = new EjecutivoDeCuenta(idEmpleado, nombre, apellidos, fechaNacimiento, ciudad, estado, direccion, sucursalMadero, salario, Rol.EJECUTIVO_CUENTA, fechaIngreso, contraseña, nombreUsuario);
         ejecutivosMadero.add(ejecutivoDeCuenta);
 
         System.out.println("\nEmpleado registrado exitosamente!");
@@ -881,7 +918,6 @@ public class Menus {
             System.out.println("Apellidos: " + empleado.getApellidos());
             System.out.println("Fecha de nacimiento: " + empleado.getFechaNacimiento());
             System.out.println("Fecha de ingreso: " + empleado.getFechaInicioTrabajo());
-            System.out.println("CURP: " + empleado.getCURP());
             System.out.println("Salario: " + empleado.getSalario());
             System.out.println("Rol: " + empleado.getRol());
 
@@ -891,8 +927,7 @@ public class Menus {
             System.out.println("2. Apellidos");
             System.out.println("3. Fecha de nacimiento");
             System.out.println("4. Fecha de ingreso");
-            System.out.println("5. CURP");
-            System.out.println("6. Salario");
+            System.out.println("5. Salario");
 
             int opcion = scanner2.nextInt();
             scanner2.nextLine(); // Consumir el salto de línea
@@ -920,12 +955,8 @@ public class Menus {
                     LocalDate nuevaFechaIngreso = LocalDate.parse(nuevaFechaIngresoString, DateTimeFormatter.ISO_DATE);
                     empleado.setFechaInicioTrabajo(nuevaFechaIngreso);
                     break;
+
                 case 5:
-                    System.out.print("Ingrese la nueva CURP: ");
-                    String nuevaCurp = scanner2.nextLine();
-                    empleado.setCURP(nuevaCurp);
-                    break;
-                case 6:
                     System.out.print("Ingrese el nuevo salario: ");
                     double nuevoSalario = scanner2.nextDouble();
                     empleado.setSalario(nuevoSalario);
@@ -952,7 +983,32 @@ public class Menus {
             System.out.println("No se encontró un empleado con el nombre de usuario " + nombreUsuario);
         }
     }
+    
+    public static void registarInversionistaMadero(){
+        Inversionista.registrarInversionistaMadero();
+    }
+    public static void modificarInversionistaMadero(){
+        SucursalMadero.modificarDatosInversionista();
+    }
+    public static void eliminarInversionista(){
+        System.out.println("Inserte el nombre de usuario del Inverionista a eliminar");
+        Scanner scanner = new Scanner(System.in);
+        String usuarioABuscar = scanner.nextLine();
 
+        Usuario inversionistaAEliminar = null;
+        for (Usuario usuario : SucursalMadero.getInversionistas()){
+            if (usuario.getUser().equals(usuarioABuscar)) {
+                inversionistaAEliminar = usuario;
+            }
+        }
+        if (inversionistaAEliminar != null) {
+            System.out.println("Se ah eliminado correctamente");
+            SucursalMadero.getInversionistas().remove(inversionistaAEliminar);
+        }else{
+            System.out.println("El inversionista con el nombre de usuario insertado no existe");
+        }
+
+    }
     public static void menuEjecutivoDeCuentaMadero(){
         Scanner scan1= new Scanner(System.in);
         System.out.print("Ingrese su nombre de usuario: ");
@@ -969,6 +1025,8 @@ public class Menus {
         }
         if (usuarioValido){
             int opcion;
+            AltaCliente s = new AltaCliente();
+
             do{
                 System.out.println("¿Qué desea hacer? ");
                 System.out.println("1. Registrar cliente\n2. Modificar cliente"
@@ -977,6 +1035,7 @@ public class Menus {
                 opcion= scan1.nextInt();
                 switch (opcion){
                     case 1:
+                        s.DarAltaCliente();
                         break;
                     case 2:
                         scan1.nextLine();
@@ -987,8 +1046,10 @@ public class Menus {
                         System.out.print("Ingrese el nombre de usuario del cliente que desea eliminar: ");
                         String nombreUsuario2= scan1.nextLine();
                     case 4:
+                        s.mostrarLista();
                         break;
                     case 5:
+                        s.autorizarSolicitudTarjeta(scan1);
                         break;
                     case 6:
                         break;
@@ -1019,9 +1080,10 @@ public class Menus {
                 System.out.println("¿Qué desea hacer? ");
                 System.out.println("1. Registrar ejecutivo de cuenta\n2. Modificar ejecutivo de cuenta"
                         + "\n3.Eliminar ejecutivo de cuenta\n4. Mostrar ejecutivos de cuenta registrados en la sucursal Madero"
-                        + "\n5. Registrar capturista\n6. Modificar capturista\n7.Eliminar capturista\n8. Registrar cliente"
-                        + "\n9.Modificar cliente\n10.Eliminar cliente\n11. Autorizar tarjeta de crédito\n"
-                        + "12. Registrar inversionista\n13. Modificar inversionista\n14. Eliminar inversionisrta\n15. Salir");
+                        + "\n5. Registrar capturista\n6. Modificar capturista\n7.Eliminar capturista\n8.Mostrar capturistas registrados\n9. Registrar cliente"
+                        + "\n10.Modificar cliente\n11.Eliminar cliente\n12. Mostrar clientes registrados" +
+                        "\n13. Autorizar tarjeta de crédito\n14. Registrar inversionista\n15. Modificar inversionista" +
+                        "\n16. Eliminar inversionista\n17. Salir");
                 opcion= scan.nextInt();
                 switch (opcion){
                     case 1:
@@ -1054,34 +1116,41 @@ public class Menus {
                         String nombreUsuario4= scan.nextLine();
                         eliminarCapturistaAcueducto(nombreUsuario4);
                         break;
-                    case 8: //Registrar cliente
+                    case 8: //Mostrrar capturistas
+                        mostrarCapturistasMadero();
+                        break;
+                    case 9: //Registrar cliente
                         s.DarAltaCliente();
                         break;
-                    case 9://Modificar datos del cliente
+                    case 10://Modificar datos del cliente
                         s.modificarDatosCliente();
                         break;
 
-                    case 10: //Eliminar cliente
+                    case 11: //Eliminar cliente
                         System.out.print("Ingrese el nombre de usuario del cliente que desea eliminar: ");
                         String nombreUsuario5= scan.nextLine();
                         s.eliminarCliente(nombreUsuario5);
                         break;
+                    case 12: //Mostrar clientes
+                        s.mostrarLista();
 
-                    case 11: //Autorizar tarjeta de crédito
+                    case 13: //Autorizar tarjeta de crédito
+                        s.autorizarSolicitudTarjeta(scan);
+                        break;
+                    case 14: //Registrar inversionista
+                        registrarInversionistaMadero();
+                         break;
+                    case 15: //Modificar inversionista
 
                         break;
-                    case 12: //Registrar inversionista
-
+                    case 16: // Eliminar inversionista
+                        eliminarInversionista();
                         break;
-                    case 13:
-                        break;
-                    case 14:
-                        break;
-                    case 15:
+                    case 17:
                         break;
 
                 }
-            }while (opcion!=15);
+            }while (opcion!=17);
             inicioSesion();
         }else {
             System.out.println("Usuario o contraseña incorrectos.");
@@ -1186,9 +1255,6 @@ public class Menus {
             }
         }
 
-        System.out.print("CURP: ");
-        String CURP = scanner1.nextLine();
-
         double salario = 0;
         boolean datoValido3 = false;
         while(!datoValido3) {
@@ -1213,7 +1279,7 @@ public class Menus {
         int idEmpleado = contadorIdEmpleado++;
 
         SucursalAcueducto sucursalAcueducto = new SucursalAcueducto("Acueducto", "Av. Acueducto #256");
-        Capturista capturista = new Capturista(idEmpleado, nombre, apellidos, fechaNacimiento, ciudad, estado, CURP, direccion, sucursalAcueducto, salario, Rol.CAPTURISTA, fechaIngreso, contraseña, nombreUsuario);
+        Capturista capturista = new Capturista(idEmpleado, nombre, apellidos, fechaNacimiento, ciudad, estado, direccion, sucursalAcueducto, salario, Rol.CAPTURISTA, fechaIngreso, contraseña, nombreUsuario);
         capturistasAcueducto.add(capturista);
 
         System.out.println("\n**Empleado registrado exitosamente!");
@@ -1240,7 +1306,6 @@ public class Menus {
             System.out.println("  Apellidos: " + capturistaAModificar.getApellidos());
             System.out.println("  Fecha de nacimiento: " + capturistaAModificar.getFechaNacimiento());
             System.out.println("  Fecha de ingreso: " + capturistaAModificar.getFechaInicioTrabajo());
-            System.out.println("  CURP: " + capturistaAModificar.getCURP());
             System.out.println("  Salario: "+capturistaAModificar.getSalario());
 
             System.out.println("¿Qué datos desea modificar? (Introduzca el número):");
@@ -1248,8 +1313,7 @@ public class Menus {
             System.out.println("2. Apellidos");
             System.out.println("3. Fecha de nacimiento");
             System.out.println("4. Fecha de ingreso");
-            System.out.println("5. CURP");
-            System.out.println("6. Salario");
+            System.out.println("5. Salario");
             System.out.println("0. Salir");
 
             int opcion = scanner2.nextInt();
@@ -1278,12 +1342,8 @@ public class Menus {
                     LocalDate nuevaFechaIngreso = LocalDate.parse(nuevaFechaIngresoString, DateTimeFormatter.ISO_DATE);
                     capturistaAModificar.setFechaInicioTrabajo(nuevaFechaIngreso);
                     break;
+
                 case 5:
-                    System.out.print("Ingrese la nueva CURP: ");
-                    String nuevaCurp = scanner2.nextLine();
-                    capturistaAModificar.setCURP(nuevaCurp);
-                    break;
-                case 6:
                     boolean datoValido = false;
                     double nuevoSalario = 0;
                     while (!datoValido) {
@@ -1361,9 +1421,6 @@ public class Menus {
         System.out.print("estado: ");
         String estado = scanner1.nextLine();
 
-        System.out.print("CURP: ");
-        String CURP = scanner1.nextLine();
-
         double salario = 0;
         boolean datoValido3 = false;
         while(!datoValido3) {
@@ -1388,7 +1445,7 @@ public class Menus {
         int idEmpleado = contadorIdEmpleado++;
 
         SucursalAcueducto sucursalAcueducto = new SucursalAcueducto("Acueducto", "Av. Acueducto #256");
-        EjecutivoDeCuenta ejecutivoDeCuenta = new EjecutivoDeCuenta(idEmpleado, nombre, apellidos, fechaNacimiento, ciudad, estado, CURP, direccion, sucursalAcueducto, salario, Rol.EJECUTIVO_CUENTA, fechaIngreso, contraseña, nombreUsuario);
+        EjecutivoDeCuenta ejecutivoDeCuenta = new EjecutivoDeCuenta(idEmpleado, nombre, apellidos, fechaNacimiento, ciudad, estado, direccion, sucursalAcueducto, salario, Rol.EJECUTIVO_CUENTA, fechaIngreso, contraseña, nombreUsuario);
         ejecutivosAcueducto.add(ejecutivoDeCuenta);
 
         System.out.println("\nEmpleado registrado exitosamente!");
@@ -1426,7 +1483,6 @@ public class Menus {
                 System.out.println("Apellidos: " + empleado.getApellidos());
                 System.out.println("Fecha de nacimiento: " + empleado.getFechaNacimiento());
                 System.out.println("Fecha de ingreso: " + empleado.getFechaInicioTrabajo());
-                System.out.println("CURP: " + empleado.getCURP());
                 System.out.println("Salario: " + empleado.getSalario());
                 System.out.println("Rol: " + empleado.getRol());
 
@@ -1436,8 +1492,7 @@ public class Menus {
                 System.out.println("2. Apellidos");
                 System.out.println("3. Fecha de nacimiento");
                 System.out.println("4. Fecha de ingreso");
-                System.out.println("5. CURP");
-                System.out.println("6. Salario");
+                System.out.println("5. Salario");
 
                 int opcion = scanner2.nextInt();
                 scanner2.nextLine(); // Consumir el salto de línea
@@ -1466,11 +1521,6 @@ public class Menus {
                         empleado.setFechaInicioTrabajo(nuevaFechaIngreso);
                         break;
                     case 5:
-                        System.out.print("Ingrese la nueva CURP: ");
-                        String nuevaCurp = scanner2.nextLine();
-                        empleado.setCURP(nuevaCurp);
-                        break;
-                    case 6:
                         System.out.print("Ingrese el nuevo salario: ");
                         double nuevoSalario = scanner2.nextDouble();
                         empleado.setSalario(nuevoSalario);
@@ -1562,9 +1612,11 @@ public class Menus {
                         String nombreUsuario2= scan2.nextLine();
                         s.eliminarCliente((nombreUsuario2));
                     case 4:
+                        s.mostrarLista();
                         break;
 
                     case 5:
+                        s.autorizarSolicitudTarjeta(scan2);
                         break;
                     case 6:
                         break;
@@ -1575,4 +1627,105 @@ public class Menus {
         }
 
     }
+    public static void mostrarCapturistasAcueducto(){
+        if (capturistasAcueducto.isEmpty()) {
+            System.out.println("No hay capturistas registrados.");
+            return;
+        }
+
+        System.out.println("\n**Lista de capturistas registrados:**");
+        for (Capturista capturista : capturistasAcueducto) {
+            System.out.println("\n"+capturista);
+        }
+    }
+    public static void mostrarCapturistasMadero(){
+        if (capturistasMadero.isEmpty()) {
+            System.out.println("No hay capturistas registrados.");
+            return;
+        }
+
+        System.out.println("\n**Lista de capturistas registrados:**");
+        for (Capturista capturista : capturistasMadero) {
+            System.out.println("\n"+capturista);
+        }
+    }
+
+    ///////////Aceptar o rechazar tarjetas
+    public static void autorizarSolicitudesDeTarjetas(SolicitudTarjeta solicitud, Empleado autorizador) {
+
+        Scanner scannerr = new Scanner(System.in);
+        if (autorizador.getRol()==Rol.EJECUTIVO_CUENTA|| autorizador.getRol()==Rol.GERENTE_SUCURSAL){
+            if (solicitud.getEstado()== EstadoSolicitud.EN_PROCESO){
+                System.out.println("Empleado "+autorizador.getNombre()+ "con rol"+autorizador.getRol());
+                System.out.println("Solicitud de tarjeta "+ solicitud.getTipoTarjeta());
+
+                System.out.print("¿Autorizar solicitud? (responda: si o no): ");
+                String respuesta = scannerr.nextLine().toLowerCase();
+
+                if(respuesta.equals("si")){
+                    solicitud.setEstado(EstadoSolicitud.APROBADA);
+                    //Método para generar tarjeta
+                    System.out.println("Solicitud autorizada correctamente. Tarjeta generada");
+                } else {
+                    solicitud.setEstado(EstadoSolicitud.RECHAZADA);
+
+                }
+
+            } else {
+                System.out.println("La solicitud ya fue procesada");
+            }
+        } else{
+            System.out.println("No eres ejecutivo ni gerente. Solo estos roles puede autorizar o rechazar tarjetas.");
+        }
+    }
+    public static void registrarInversionistaMadero(){
+        Scanner sc= new Scanner(System.in);
+        double saldo;
+        ArrayList<String> datosComun = UsuarioUtils.registarUsuarioComun();
+        String nombre = datosComun.get(0);
+        String apellido = datosComun.get(1);
+        String domicilio = datosComun.get(2);
+        String nacimiento = datosComun.get(3);
+        String rfc = datosComun.get(4);
+        String curp = datosComun.get(5);
+        String user = datosComun.get(6);
+        String password = datosComun.get(7);
+        System.out.println("Inserte el saldo inicial del inversionista");
+        while (true){
+            try {
+                 saldo = sc.nextDouble();
+                break;
+            }catch (InputMismatchException e){
+                System.out.println("Ingreso un valor invalido intentelo de nuevo");
+            }
+        }
+
+        Inversionista inversionista = new Inversionista(nombre, apellido, domicilio, nacimiento, rfc, curp, user, password, saldo);
+        SucursalMadero.getInversionistas().add(inversionista);
+    }
+    public void registrarInversionistaAcueducto(){
+        double saldo;
+        ArrayList<String> datosComun = UsuarioUtils.registarUsuarioComun();
+        String nombre = datosComun.get(0);
+        String apellido = datosComun.get(1);
+        String domicilio = datosComun.get(2);
+        String nacimiento = datosComun.get(3);
+        String rfc = datosComun.get(4);
+        String curp = datosComun.get(5);
+        String user = datosComun.get(6);
+        String password = datosComun.get(7);
+        System.out.println("Inserte el saldo inicial del inversionista");
+        while (true){
+            try {
+                 saldo = scanner.nextDouble();
+                break;
+            }catch (InputMismatchException e){
+                System.out.println("Ingreso un valor invalido intentelo de nuevo");
+            }
+        }
+
+        Inversionista inversionista = new Inversionista(nombre, apellido, domicilio, nacimiento, rfc, curp, user, password, saldo);
+        SucursalAcueducto.getInversionistas().add(inversionista);
+    }
+
 }

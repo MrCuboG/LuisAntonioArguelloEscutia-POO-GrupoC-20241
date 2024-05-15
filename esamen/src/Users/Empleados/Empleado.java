@@ -5,6 +5,8 @@ import Users.Usuario;
 import java.time.LocalDate;
 import Users.utils.constantes.Rol;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
+import java.util.*;
 
 public class Empleado{
     protected int idEmpleado;
@@ -24,18 +26,14 @@ public class Empleado{
     protected String nombreUsuario;
     private static int contadorIdEmpleado = 1;
 
-    public Empleado (){
 
-    }
-
-    public Empleado(int idEmpleado, String nombre, String apellidos, LocalDate fechaNacimiento, String ciudad, String estado, String CURP, String direccion, Sucursal sucursal, double salario, Rol rol, LocalDate fechaInicioTrabajo, String contraseña, String nombreUsuario) {
+    public Empleado(int idEmpleado, String nombre, String apellidos, LocalDate fechaNacimiento, String ciudad, String estado, String direccion, Sucursal sucursal, double salario, Rol rol, LocalDate fechaInicioTrabajo, String contraseña, String nombreUsuario) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
         this.apellidos = apellidos != null ? apellidos : "Sin apellidos"; // Asignar valor por defecto si es nulo
         this.fechaNacimiento = fechaNacimiento;
         this.ciudad = ciudad;
-        this.estado = estado;
-        this.CURP = CURP;
+        this.estado = estado != null ? estado : "Sin estado";
         this.direccion = direccion;
         this.sucursal = sucursal;
         this.salario = salario;
@@ -43,8 +41,12 @@ public class Empleado{
         this.fechaInicioTrabajo = fechaInicioTrabajo;
         this.contraseña= contraseña;
         this.nombreUsuario= nombreUsuario;
+        this.CURP= generarCurp();
         this.rfc= generarRFC();
 
+    }
+    public void setCURP(String CURP) {
+        this.CURP = CURP;
     }
 
     public void setRfc(String rfc) {
@@ -82,14 +84,6 @@ public class Empleado{
 
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public String getCURP() {
-        return CURP;
-    }
-
-    public void setCURP(String CURP) {
-        this.CURP = CURP;
     }
 
     public String getDireccion() {
@@ -174,18 +168,37 @@ public class Empleado{
 
         return homonimo.toUpperCase() +primeraLetraApellidoMaterno.toUpperCase()+nombre.toUpperCase()+ fechaNacimientoStr ;
     }
-    public String generarCurp(){
+    public String generarCurp() {
         String homonimo = apellidos.substring(0, 1);
         String primeraLetraApellidoMaterno = buscarPrimeraVocal(apellidos.split(" ")[1]);
         String nombrePrimeraLetra = nombre.substring(0, 1);
 
-        String fechaNacimientoStr="";
+        String codigoEntidadFederativa = "";
+        try {
+            if (estado != null) { // Verificar si estado es null
+                codigoEntidadFederativa = estado.substring(0, 1);
+            } else {
+                System.err.println("Error al generar CURP: el estado del empleado es null");
+                return null; // Manejar la excepción de forma adecuada
+            }
+        } catch (NullPointerException e) {
+            System.err.println("Error al formatear la fecha de nacimiento: " + e.getMessage());
+            return null;
+        }
+
+        String fechaNacimientoStr = "";
         try {
             fechaNacimientoStr = fechaNacimiento.format(DateTimeFormatter.ofPattern("yyMMdd"));
         } catch (NullPointerException e) {
             System.err.println("Error al formatear la fecha de nacimiento: " + e.getMessage());
             return null;
         }
+        Random random = new Random();
+        int digitoAleatorio = random.nextInt(10) + 1;
+        String curp = homonimo.toUpperCase() + primeraLetraApellidoMaterno.toUpperCase() +
+                nombrePrimeraLetra.toUpperCase() + fechaNacimientoStr +
+                codigoEntidadFederativa + digitoAleatorio;
+        return curp;
     }
 
     private String buscarPrimeraVocal (String cadena) {
@@ -197,13 +210,6 @@ public class Empleado{
         }
         return "";
     }
-
-    private String obtenerCodigoDeEntidadFederativa(){
-        if (estado)
-    }
-
-
-
 
     @Override
     public String toString() {

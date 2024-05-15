@@ -3,19 +3,17 @@ import Users.utils.constantes.Rol;
 import java.time.LocalDate;
 import Sucursales.*;
 import tarjetas.SolicitudTarjeta;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EjecutivoDeCuenta extends Empleado {
 
-    /*private List<SolicitudTarjeta> solicitud;
-
-    public EjecutivoDeCuenta() {
-        this.requests = new ArrayList<>();
-    }*/
+    private List<SolicitudTarjeta> solicitud;
 
     public EjecutivoDeCuenta(int idEmpleado, String nombre, String apellidos, LocalDate fechaNacimiento,
-                             String ciudad, String estado, String CURP, String direccion, Sucursal sucursal,
+                             String ciudad, String estado, String direccion, Sucursal sucursal,
                              double salario, Rol rol, LocalDate fechaInicioTrabajo, String contraseña, String nombreUsuario) {
-        super(idEmpleado, nombre, apellidos, fechaNacimiento, ciudad, estado, CURP, direccion,
+        super(idEmpleado, nombre, apellidos, fechaNacimiento, ciudad, estado, direccion,
                 sucursal, salario, Rol.EJECUTIVO_CUENTA, fechaInicioTrabajo, contraseña, nombreUsuario);
     }
 
@@ -23,16 +21,8 @@ public class EjecutivoDeCuenta extends Empleado {
         this.rfc = generarRFC();
     }
 
-    /*public void verSolicitudes() {
-        for (SolicitudTarjeta request : solicitud) {
+    public void setCURP(String CURP) {
+        this.CURP = generarCurp();
+    }
 
-            System.out.println("Cliente: " + solicitud.Cliente.getNombre);//nombre
-            System.out.println("Tipo de tarjeta: " + );//tipo
-            System.out.println("Saldo Debe: " + );//saldo
-            System.out.println("Estado: " + );//estado
-            Sistema.out.println();
-
-
-        }
-    }*/
 }

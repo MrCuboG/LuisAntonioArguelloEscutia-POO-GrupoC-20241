@@ -15,7 +15,7 @@ public class Sistema {
     SucursalMadero sucursalMadero = new SucursalMadero(null, null);
     SucursalAcueducto sucursalAcueducto = new SucursalAcueducto(null, null);
 
-    GerenteSucursal gerente2 = new GerenteSucursal(1, "a", null, localDate, null, null, "a", "123", sucursalAcueducto, 123,  Rol.GERENTE_SUCURSAL, null, "123", "a");
+    GerenteSucursal gerente2 = new GerenteSucursal(1, "a", null, localDate, null, "michoacan", "a", "123", sucursalAcueducto, 123,  Rol.GERENTE_SUCURSAL, null, "123", "a");
     public void iniciarSistema(){
 
         menus.inicioSesion();

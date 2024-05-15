@@ -15,9 +15,9 @@ public class SucursalAcueducto extends Sucursal{
 
     private static int contadorIdEmpleado = 1;
     int idGerente = 1;
-    static HashMap<Rol, ArrayList<Empleado>> empleados = new HashMap<>();
-    static HashMap<Rol, ArrayList<Inversionista>> inversionistas = new HashMap<>();
 
+    static HashMap<Rol, ArrayList<Empleado>> empleados = new HashMap<>();
+    static ArrayList<Inversionista> inversionistas = new ArrayList<>();
     GerenteSucursal gerenteAcueducto = new GerenteSucursal(idGerente,"Diana", "Campos Rosas", LocalDate. of(2005, 10, 24),"Morelia","Michoacán",
             "CARD051024MMNMSNA5","Calle Morelos #456", this, 50000.00,Rol.GERENTE_SUCURSAL,LocalDate.of(2020, 01, 01), "a", "e");
 
@@ -80,7 +80,7 @@ public class SucursalAcueducto extends Sucursal{
         String usuarioABuscar = scanner.nextLine();
 
         Usuario inversionistaAModificar = null;
-        for (Usuario usuario : inversionistas.get(Rol.INVERSIONISTA)){
+        for (Usuario usuario : inversionistas){
             if (usuario.getUser().equals(usuarioABuscar)) {
                 inversionistaAModificar = usuario;
             }
@@ -154,7 +154,8 @@ public class SucursalAcueducto extends Sucursal{
         } else {
             System.out.println("No se encontró ningún inversionista con el usuario: " + usuarioABuscar);
         }
-
-        scanner.close();
+    }
+    public static ArrayList<Inversionista> getInversionistas() {
+        return inversionistas;
     }
 }

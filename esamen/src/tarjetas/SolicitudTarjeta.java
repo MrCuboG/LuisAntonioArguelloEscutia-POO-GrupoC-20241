@@ -21,6 +21,9 @@ public class SolicitudTarjeta {
         this.fechaSolicitud = LocalDateTime.now();
         this.estado = EstadoSolicitud.EN_PROCESO;
     }
+    public SolicitudTarjeta(){
+
+    }
     public Cliente getCliente() {
         return cliente;
     }
@@ -52,4 +55,7 @@ public class SolicitudTarjeta {
     public void setEstado(EstadoSolicitud estado) {
         this.estado = estado;
     }
+
+
+
 }

@@ -1,6 +1,7 @@
 package Users;
 import Sucursales.SucursalMadero;
 import Users.utils.constantes.Rol;
+import tarjetas.*;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class AltaCliente {
     String homoclave = generarHomoclave(random, secureRandom);
 
     private static List<Cliente> clientes;
+    private static Cliente clienteAtual;
 
     public AltaCliente() {
         this.clientes = new ArrayList<>();
@@ -27,7 +29,9 @@ public class AltaCliente {
     public void DarAltaCliente() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("*** Programa de alta de clientes ***");
+        System.out.println("*** Alta de clientes ***");
+        Random random = new Random();
+        int idAleatorio = random.nextInt(1000000000);
 
         System.out.print("Ingrese su nombre: ");
         String nombre = sc.nextLine();
@@ -64,16 +68,17 @@ public class AltaCliente {
         String contraseña = sc.nextLine();
 
         // Obtener fecha de registro actual
+
         LocalDate fechaRegistro = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String fechaRegistroStr = fechaRegistro.format(formatter);
         String cadena = curp;
         String rfc1 = cadena.substring(0, 10);
         String rfc = rfc1 + homoclave;
-        Cliente cliente = new Cliente(123, nombre, apellidos, direccion, añoNacimiento, rfc, curp, usuario, contraseña, fechaRegistroStr);
-        //Cliente cliente = new Cliente(nombre, apellidos, añoNacimiento, ciudad, estado, curp, rfc,
-        //        fechaRegistroStr, usuario, contraseña, sucursalRegistro, direccion);
-        SucursalMadero.getClientes().add(cliente);
+        Cliente cliente = new Cliente(nombre, apellidos, añoNacimiento, ciudad, estado, curp, rfc,
+                fechaRegistroStr, contraseña, sucursalRegistro, direccion);
+        clientes.add(cliente);
+        clienteAtual = cliente;
 
         // Imprimir información del cliente
         System.out.println("\n** Datos del cliente **");
@@ -97,6 +102,16 @@ public class AltaCliente {
 
         return Homoclaveof;
 
+    }
+
+    public void mostrarLista() {
+        if (clientes.isEmpty()) {
+            System.out.println("No hay clientes registrados");
+        } else {
+            for (Object elemento : clientes) {
+                System.out.println(elemento);
+            }
+        }
     }
 
     public void modificarDatosCliente() {
@@ -135,7 +150,7 @@ public class AltaCliente {
                 case 2:
                     System.out.print("Ingrese los nuevos apellidos: ");
                     String nuevosApellidos = sc.nextLine();
-                    clienteAModificar.setApellido(nuevosApellidos);
+                    clienteAModificar.setApellidos(nuevosApellidos);
                     break;
                 case 3:
                     System.out.print("Ingrese la nueva ciudad: ");
@@ -155,7 +170,7 @@ public class AltaCliente {
                 case 6:
                     System.out.print("Ingrese la nueva contraseña: ");
                     String nuevaContrasena = sc.nextLine();
-                    clienteAModificar.setPassword(nuevaContrasena);
+                    clienteAModificar.setContraseña(nuevaContrasena);
                     break;
                 case 7:
                     break;
@@ -168,7 +183,6 @@ public class AltaCliente {
             System.out.println("No se encontró ningún cliente con el nombre: " + nombreABuscar);
         }
 
-        sc.close();
     }
 
     public void eliminarCliente(String nombreUsuario) {
@@ -176,7 +190,7 @@ public class AltaCliente {
 
         Cliente clienteAEliminar = null;
         for (Cliente cliente : clientes) {
-            if (cliente.getUser().equals(nombreUsuario)) {
+            if (cliente.getNombre().equals(nombreUsuario)) {
                 clienteAEliminar = cliente;
                 break;
             }
@@ -199,4 +213,68 @@ public class AltaCliente {
             System.out.println("No se encontró ningún cliente con el nombre de usuario: " + nombreUsuario);
         }
     }
+
+    public static void autorizarSolicitudTarjeta(Scanner scanner) {
+        ArrayList<SolicitudTarjeta> solicitudesCliente = clienteAtual.getSolicitudesTarjeta();
+        mostrarSolicitudesPendientes(solicitudesCliente);
+        System.out.print("Ingrese el número de la solicitud que desea autorizar: ");
+        int numeroSolicitud = scanner.nextInt();
+        scanner.nextLine(); //
+
+        SolicitudTarjeta solicitud = null;
+        for (SolicitudTarjeta solicitudAux : solicitudesCliente) {
+
+            if (solicitud.getEstado() != EstadoSolicitud.EN_PROCESO) {
+                System.out.println("La solicitud ya fue procesada.");
+                return;
+            }
+
+            System.out.println("\n** Solicitud de tarjeta: " + numeroSolicitud + " **");
+            System.out.println("Tipo de tarjeta: " + solicitud.getTipoTarjeta());
+            System.out.println("Cliente: " + solicitud.getCliente().getNombre() + " " + solicitud.getCliente().getApellidos());
+            System.out.println("Estado actual: " + solicitud.getEstado());
+
+            System.out.print("¿Autorizar solicitud? (ingrese si o no): ");
+            String respuesta = scanner.nextLine().toLowerCase();
+
+            if (respuesta.equals("si")) {
+                solicitud.setEstado(EstadoSolicitud.APROBADA);
+                generarTarjeta(solicitud);
+                System.out.println("Solicitud autorizada correctamente.");
+            } else {
+                solicitud.setEstado(EstadoSolicitud.RECHAZADA);
+                System.out.println("Solicitud rechazada.");
+            }
+        }
+    }
+
+        public static void generarTarjeta(SolicitudTarjeta solicitud){
+            switch (solicitud.getTipoTarjeta()) {
+                case PLATINO:
+                    TarjetaPlatino.crearTarjetaPlatino();
+                    break;
+                case ORO:
+                    TarjetaOro.crearTarjetaOro();
+                    break;
+                case SIMPLICITY:
+                    TarjetaSimplicity.crearTarjetaSimplicity();
+                    break;
+                default:
+                    System.out.println("Tipo de tarjeta no reconocido: " + solicitud.getTipoTarjeta());
+            }
+        }
+        public static void mostrarSolicitudesPendientes(ArrayList <SolicitudTarjeta> solicitudes) {
+            if (solicitudes.isEmpty()) {
+                System.out.println("No hay solicitudes pendientes .");
+            } else {
+                System.out.println("Solicitudes pendientes:");
+                for (int i = 0; i < solicitudes.size(); i++) {
+                    SolicitudTarjeta solicitud = solicitudes.get(i);
+                    System.out.println((i + 1) + ". Cliente: " + solicitud.getCliente().getNombre() + " (" + solicitud.getTipoTarjeta() + ")");
+                }
+            }
+        }
+
+
 }
+
